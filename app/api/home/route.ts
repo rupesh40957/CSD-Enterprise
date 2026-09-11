@@ -1,8 +1,5 @@
+import { NextResponse } from "next/server";
 import { getDatabase } from "@/lib/mongodb";
-import Navbar from "@/components/Navbar";
-import DynamicSectionRenderer, { DynamicHomeData } from "@/components/DynamicSectionRenderer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import Footer from "@/components/Footer";
 import {
   WebsiteSettings,
   NavigationItem,
@@ -23,11 +20,7 @@ import {
 
 export const dynamic = "force-dynamic";
 
-async function getHomeData(): Promise<{
-  settings: WebsiteSettings | null;
-  navigation: NavigationItem[];
-  homeData: DynamicHomeData;
-}> {
+export async function GET() {
   try {
     const db = await getDatabase();
 
@@ -65,52 +58,34 @@ async function getHomeData(): Promise<{
       db.collection<CtaContent>("ctaContent").findOne({}),
     ]);
 
-    // Serialize ObjectIds for Client Components
-    function serialize<T>(item: T): T {
-      return JSON.parse(JSON.stringify(item));
-    }
-
-    const homeData: DynamicHomeData = {
-      settings: settings ? serialize(settings) : null,
-      sections: serialize(sections),
-      heroSlides: serialize(heroSlides),
-      statistics: serialize(statistics),
-      aboutContent: aboutContent ? serialize(aboutContent) : null,
-      services: serialize(services),
-      industries: serialize(industries),
-      projects: serialize(projects),
-      clients: serialize(clients),
-      certifications: serialize(certifications),
-      testimonials: serialize(testimonials),
-      blogPosts: serialize(blogPosts),
-      faqs: serialize(faqs),
-      ctaContent: ctaContent ? serialize(ctaContent) : null,
-    };
-
-    return {
-      settings: settings ? serialize(settings) : null,
-      navigation: serialize(navigation),
-      homeData,
-    };
+    return NextResponse.json({
+      success: true,
+      data: {
+        settings: settings || null,
+        navigation: navigation || [],
+        sections: sections || [],
+        heroSlides: heroSlides || [],
+        statistics: statistics || [],
+        aboutContent: aboutContent || null,
+        services: services || [],
+        industries: industries || [],
+        projects: projects || [],
+        clients: clients || [],
+        certifications: certifications || [],
+        testimonials: testimonials || [],
+        blogPosts: blogPosts || [],
+        faqs: faqs || [],
+        ctaContent: ctaContent || null,
+      },
+    });
   } catch (error) {
-    console.error("Failed to load home page data from MongoDB:", error instanceof Error ? error.message : "Unknown error");
-    return {
-      settings: null,
-      navigation: [],
-      homeData: {},
-    };
+    console.error("Error in /api/home:", error instanceof Error ? error.message : "Unknown error");
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Failed to load home content from database",
+      },
+      { status: 500 }
+    );
   }
-}
-
-export default async function HomePage() {
-  const { settings, navigation, homeData } = await getHomeData();
-
-  return (
-    <main className="min-h-screen flex flex-col bg-slate-50 dark:bg-navy-950 text-slate-900 dark:text-slate-100 transition-colors">
-      <Navbar settings={settings} navItems={navigation} />
-      <DynamicSectionRenderer data={homeData} />
-      <FloatingWhatsApp />
-      <Footer settings={settings} services={homeData.services} navItems={navigation} />
-    </main>
-  );
 }
