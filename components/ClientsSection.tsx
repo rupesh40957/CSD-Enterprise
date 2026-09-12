@@ -96,7 +96,7 @@ export default function ClientsSection({ clients = [] }: ClientsSectionProps) {
 
             return (
               <div
-                key={(" _id" in client && client._id) ? String(client._id) : client.name}
+                key={("_id" in client && (client as Client)._id) ? String((client as Client)._id) : client.name}
                 className="p-5 sm:p-6 rounded-2xl glass-panel flex flex-col items-center justify-between text-center group hover:border-red-500/50 dark:hover:border-red-500/40 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-red-500/10 min-h-[175px] sm:min-h-[195px] card-hover bg-white/90 dark:bg-navy-900/70 border border-slate-200/90 dark:border-navy-800"
               >
                 {/* Official Logo Container */}

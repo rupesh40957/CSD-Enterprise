@@ -151,13 +151,13 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
             onClick={(e) => handleNavClick(e, "#hero")}
             className="flex items-center gap-3 group focus:outline-none"
           >
-            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden bg-white dark:bg-navy-900 p-1.5 border border-slate-200 dark:border-red-500/30 shadow-sm shadow-red-500/10 flex items-center justify-center transition-transform group-hover:scale-105">
+            <div className="relative w-[50px] h-[32px] sm:w-[56px] sm:h-[36px] rounded-xl overflow-hidden bg-white dark:bg-navy-900 p-1 border border-slate-200 dark:border-red-500/30 shadow-sm shadow-red-500/10 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
               <Image
                 src={logoSrc}
                 alt={`${companyName} Logo`}
-                width={48}
-                height={48}
-                className="object-contain"
+                width={56}
+                height={36}
+                className="object-contain w-full h-full"
                 priority
               />
             </div>

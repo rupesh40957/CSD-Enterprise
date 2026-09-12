@@ -97,6 +97,7 @@ export const websiteSettingsSchema = z.object({
   facebook: z.string().trim().optional(),
   twitter: z.string().trim().optional(),
   linkedin: z.string().trim().optional(),
+  instagram: z.string().trim().optional(),
   youtube: z.string().trim().optional(),
   whatsapp: z.string().trim().optional(),
   defaultSeoTitle: z.string().trim().min(5, "SEO title is required"),

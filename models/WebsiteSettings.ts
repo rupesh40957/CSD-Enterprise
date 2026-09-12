@@ -15,6 +15,7 @@ export interface WebsiteSettings {
   facebook?: string;
   twitter?: string;
   linkedin?: string;
+  instagram?: string;
   youtube?: string;
   whatsapp?: string;
   defaultSeoTitle: string;
