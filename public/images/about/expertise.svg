@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="expertiseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#ec4899" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Circle -->
+  <circle cx="200" cy="200" r="190" fill="url(#expertiseGrad)" filter="url(#glow)"/>
+  
+  <!-- Subtle inner concentric ring -->
+  <circle cx="200" cy="200" r="175" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.25" stroke-dasharray="8 6"/>
+
+  <!-- Head Silhouette Profile -->
+  <path d="M 230 110 C 180 110 145 145 145 195 C 145 230 162 258 188 273 L 188 305 L 245 305 L 245 282 C 248 282 252 280 256 276 L 270 260 C 275 254 278 245 278 236 L 278 220 L 268 220 L 268 200 C 268 190 260 182 250 182 L 242 182 C 242 142 242 110 230 110 Z" fill="#ffffff" fill-opacity="0.95" />
+
+  <!-- Microchip & Circuit Lines inside Head -->
+  <rect x="185" y="160" width="40" height="40" rx="8" fill="#1e1b4b" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="205" cy="180" r="8" fill="#38bdf8"/>
+  
+  <!-- Circuit Nodes & Traces -->
+  <line x1="205" y1="160" x2="205" y2="135" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="205" cy="135" r="4" fill="#ffffff"/>
+  
+  <line x1="225" y1="180" x2="245" y2="180" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="245" cy="180" r="4" fill="#ffffff"/>
+
+  <line x1="185" y1="180" x2="165" y2="180" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="165" cy="180" r="4" fill="#ffffff"/>
+
+  <line x1="205" y1="200" x2="205" y2="225" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="205" cy="225" r="4" fill="#ffffff"/>
+
+  <!-- Corner nodes -->
+  <line x1="220" y1="165" x2="235" y2="150" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="235" cy="150" r="3.5" fill="#38bdf8"/>
+
+  <line x1="190" y1="165" x2="175" y2="150" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="175" cy="150" r="3.5" fill="#38bdf8"/>
+</svg>

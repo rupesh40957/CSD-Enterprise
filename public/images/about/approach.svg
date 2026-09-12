@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <radialGradient id="approachBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="85%" stop-color="#e2e8f0" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </radialGradient>
+    <filter id="shadowApp" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#64748b" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Circular Base -->
+  <circle cx="200" cy="200" r="190" fill="url(#approachBg)" stroke="#94a3b8" stroke-width="2" filter="url(#shadowApp)"/>
+  
+  <!-- Doodles / Brainstorming background sketches -->
+  <!-- Lightbulb (Ideas) -->
+  <path d="M 190 75 C 190 65 210 65 210 75 C 210 82 205 86 205 92 L 195 92 C 195 86 190 82 190 75 Z" fill="none" stroke="#0284c7" stroke-width="2.5"/>
+  <line x1="195" y1="96" x2="205" y2="96" stroke="#0284c7" stroke-width="2"/>
+  <line x1="200" y1="58" x2="200" y2="50" stroke="#0284c7" stroke-width="2"/>
+  <line x1="182" y1="64" x2="175" y2="58" stroke="#0284c7" stroke-width="2"/>
+  <line x1="218" y1="64" x2="225" y2="58" stroke="#0284c7" stroke-width="2"/>
+
+  <!-- Rocket / Growth Doodle -->
+  <path d="M 120 100 Q 135 90 145 110 L 138 122 L 126 114 Z" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <circle cx="134" cy="108" r="2.5" fill="#dc2626"/>
+
+  <!-- Gear / Engineering Doodle -->
+  <circle cx="270" cy="105" r="12" fill="none" stroke="#059669" stroke-width="2"/>
+  <circle cx="270" cy="105" r="5" fill="#059669"/>
+
+  <!-- Bar Chart Doodle -->
+  <rect x="75" y="145" width="6" height="15" fill="#3b82f6" rx="1"/>
+  <rect x="85" y="135" width="6" height="25" fill="#3b82f6" rx="1"/>
+  <rect x="95" y="125" width="6" height="35" fill="#3b82f6" rx="1"/>
+
+  <!-- Strategy Target / Compass Doodle -->
+  <circle cx="315" cy="145" r="16" fill="none" stroke="#d97706" stroke-width="2"/>
+  <circle cx="315" cy="145" r="8" fill="none" stroke="#d97706" stroke-width="1.5"/>
+  <circle cx="315" cy="145" r="2" fill="#d97706"/>
+
+  <!-- Cloud / Network Doodle -->
+  <path d="M 140 160 Q 135 150 145 145 Q 155 140 160 150 Q 170 145 175 155 Q 180 165 170 170 L 145 170 Z" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+
+  <!-- Meeting Table & Silhouettes -->
+  <!-- Conference Table (Ellipse) -->
+  <ellipse cx="200" cy="270" rx="120" ry="40" fill="#334155" stroke="#1e293b" stroke-width="3"/>
+  <ellipse cx="200" cy="268" rx="112" ry="34" fill="#475569"/>
+
+  <!-- Papers / Laptops on Table -->
+  <rect x="185" y="258" width="30" height="18" rx="2" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+  <rect x="145" y="260" width="22" height="14" rx="2" fill="#e2e8f0"/>
+  <rect x="235" y="260" width="22" height="14" rx="2" fill="#e2e8f0"/>
+
+  <!-- People Silhouettes Around Table -->
+  <!-- Person Left 1 -->
+  <circle cx="100" cy="225" r="14" fill="#0f172a"/>
+  <path d="M 85 270 C 85 245 115 245 115 270 Z" fill="#0f172a"/>
+
+  <!-- Person Left 2 -->
+  <circle cx="145" cy="205" r="14" fill="#0f172a"/>
+  <path d="M 130 250 C 130 225 160 225 160 250 Z" fill="#0f172a"/>
+
+  <!-- Person Center (Leader presenting) -->
+  <circle cx="200" cy="195" r="16" fill="#0f172a"/>
+  <path d="M 180 245 C 180 215 220 215 220 245 Z" fill="#0f172a"/>
+
+  <!-- Person Right 2 -->
+  <circle cx="255" cy="205" r="14" fill="#0f172a"/>
+  <path d="M 240 250 C 240 225 270 225 270 250 Z" fill="#0f172a"/>
+
+  <!-- Person Right 1 -->
+  <circle cx="300" cy="225" r="14" fill="#0f172a"/>
+  <path d="M 285 270 C 285 245 315 245 315 270 Z" fill="#0f172a"/>
+
+  <!-- Foreground Figures -->
+  <circle cx="160" cy="305" r="15" fill="#1e293b"/>
+  <path d="M 140 350 C 140 325 180 325 180 350 Z" fill="#1e293b"/>
+
+  <circle cx="240" cy="305" r="15" fill="#1e293b"/>
+  <path d="M 220 350 C 220 325 260 325 260 350 Z" fill="#1e293b"/>
+</svg>
