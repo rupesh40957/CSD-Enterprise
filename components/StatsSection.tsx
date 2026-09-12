@@ -34,7 +34,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
 /** Animated counter hook — counts up from 0 to target value */
 function useCountUp(target: number, duration = 1800, start = false) {
   const [count, setCount] = useState(0);
-  const frameRef = useRef<number>();
+  const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!start) return;

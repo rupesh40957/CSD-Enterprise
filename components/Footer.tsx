@@ -12,6 +12,7 @@ import {
   AlertCircle,
   ArrowRight,
 } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 import { WebsiteSettings, Service, NavigationItem } from "@/models";
 
 interface FooterProps {
@@ -24,10 +25,15 @@ export default function Footer({ settings, services = [], navItems = [] }: Foote
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const { theme } = useTheme();
 
   const logoSrc = settings?.logo && settings.logo !== "/logo/csd-logo.png" ? settings.logo : "/logo/csd-logo.svg";
   const companyName = settings?.companyName || "CSD Enterprises";
   const tagline = settings?.tagline || "Unit of CSD Automation & Technologies";
+  const logoClassName =
+    theme === "dark"
+      ? "object-contain w-full h-full transition-all duration-300 brightness-0 invert"
+      : "object-contain w-full h-full transition-all duration-300";
   const phone = settings?.phone || "+91 8355976842";
   const emailAddr = settings?.email || "support@csdenterprises.in";
   const address = settings?.address || "OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai - 401203";
@@ -79,18 +85,18 @@ export default function Footer({ settings, services = [], navItems = [] }: Foote
           {/* Col 1: Brand & Summary */}
           <div className="lg:col-span-4 space-y-4">
             <Link href="#hero" className="flex items-center gap-3 group">
-              <div className="w-[50px] h-[32px] sm:w-[56px] sm:h-[36px] rounded-xl overflow-hidden p-1 flex items-center justify-center shrink-0 text-navy-950 dark:text-white">
+              <div className="w-[50px] h-[32px] sm:w-[56px] sm:h-[36px] rounded-xl overflow-hidden p-1 flex items-center justify-center shrink-0 bg-slate-200/80 dark:bg-slate-800/60 ring-1 ring-slate-300/80 dark:ring-slate-700/80 shadow-sm">
                 <Image
                   src={logoSrc}
                   alt={`${companyName} Logo`}
                   width={56}
                   height={36}
-                  className="object-contain w-full h-full"
+                  className={logoClassName}
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-black tracking-tight text-red-600 dark:text-red-500">
-                  <span>CSD</span> <span className="text-red-600 dark:text-red-400">Enterprises</span>
+                <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
+                  <span className="text-red-600 dark:text-red-400">CSD</span> <span className="text-slate-900 dark:text-white">Enterprises</span>
                 </span>
                 <span className="text-[10px] tracking-wider uppercase font-semibold text-slate-500 dark:text-slate-400">
                   {tagline}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X, ChevronRight, PhoneCall } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "@/context/ThemeContext";
 import { WebsiteSettings, NavigationItem } from "@/models";
 
 interface NavbarProps {
@@ -28,6 +29,7 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("#hero");
   const isClickingRef = useRef(false);
+  const { theme } = useTheme();
 
   const items = navItems && navItems.length > 0
     ? navItems.filter((i) => i.isActive)
@@ -134,13 +136,17 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
   const logoSrc = settings?.logo && settings.logo !== "/logo/csd-logo.png" ? settings.logo : "/logo/csd-logo.svg";
   const companyName = settings?.companyName || "CSD Enterprises";
   const tagline = settings?.tagline || "UNIT OF CSD AUTOMATION & TECHNOLOGIES";
+  const logoClassName =
+    theme === "dark"
+      ? "object-contain w-full h-full transition-all duration-300 brightness-0 invert"
+      : "object-contain w-full h-full transition-all duration-300";
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 dark:bg-navy-950/95 backdrop-blur-md shadow-md shadow-slate-900/5 dark:shadow-red-950/20 border-b border-slate-200/80 dark:border-red-500/20 py-2.5"
-          : "bg-white/80 dark:bg-navy-950/80 backdrop-blur-sm border-b border-slate-200/50 dark:border-navy-800/60 py-3.5"
+          ? "bg-white/90 dark:bg-[#060d1a]/90 backdrop-blur-md shadow-md shadow-slate-900/5 dark:shadow-red-950/20 border-b border-slate-200/80 dark:border-red-500/20 py-2.5"
+          : "bg-white/75 dark:bg-[#050b18]/85 backdrop-blur-sm border-b border-slate-200/50 dark:border-slate-800/80 py-3.5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -151,19 +157,19 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
             onClick={(e) => handleNavClick(e, "#hero")}
             className="flex items-center gap-3 group focus:outline-none"
           >
-            <div className="relative w-[50px] h-[32px] sm:w-[56px] sm:h-[36px] rounded-xl overflow-hidden p-1 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0 text-navy-950 dark:text-white">
+            <div className="relative w-[50px] h-[32px] sm:w-[56px] sm:h-[36px] rounded-xl overflow-hidden p-1 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0 bg-slate-100/80 dark:bg-slate-800/60 ring-1 ring-slate-200/70 dark:ring-slate-700/80 shadow-sm">
               <Image
                 src={logoSrc}
                 alt={`${companyName} Logo`}
                 width={56}
                 height={36}
-                className="object-contain w-full h-full"
+                className={logoClassName}
                 priority
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg sm:text-xl font-black tracking-tight text-red-600 dark:text-red-500 flex items-center gap-1.5 leading-none">
-                <span>CSD</span> <span className="text-red-600 dark:text-red-500">Enterprises</span>
+              <span className="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5 leading-none">
+                <span className="text-red-600 dark:text-red-400">CSD Enterprises</span>
               </span>
               <span className="text-[9px] sm:text-[10px] tracking-wider uppercase font-bold text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">
                 {tagline}

@@ -71,11 +71,17 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   )}`;
 
   return (
-    <main className="min-h-screen flex flex-col bg-slate-50 dark:bg-navy-950 text-slate-900 dark:text-slate-100 transition-colors">
-      <Navbar settings={settings} />
+    <main className="detail-shell relative min-h-screen flex flex-col bg-slate-50 dark:bg-[#050b18] text-slate-900 dark:text-slate-100 transition-colors overflow-hidden">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="ambient-orb ambient-orb-red" />
+        <div className="ambient-orb ambient-orb-cyan" />
+      </div>
 
-      <article className="flex-1 pt-28 sm:pt-32 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10">
+        <Navbar settings={settings} />
+
+        <article className="flex-1 pt-28 sm:pt-32 pb-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb Navigation */}
           <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
             <Link href="/" className="hover:text-red-600 dark:hover:text-cyan-400 transition-colors">
@@ -92,7 +98,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </nav>
 
           {/* Hero Header */}
-          <div className="space-y-4 mb-10">
+          <div className="space-y-4 mb-10 animate-fade-in-up">
             <div className="flex flex-wrap items-center gap-2.5">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-red-600/10 text-red-600 dark:bg-red-500/10 dark:text-red-400 border border-red-500/20">
                 <Sparkles className="w-3 h-3 text-red-500" />
@@ -114,7 +120,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
 
           {/* Main Hero Showcase Banner */}
-          <div className="relative h-80 sm:h-[420px] lg:h-[480px] w-full rounded-3xl overflow-hidden mb-14 shadow-2xl border border-slate-200 dark:border-navy-800 group">
+          <div className="detail-hero relative h-80 sm:h-[420px] lg:h-[480px] w-full rounded-[28px] overflow-hidden mb-14 border border-slate-200 dark:border-slate-800 group shadow-[0_30px_80px_-25px_rgba(239,68,68,0.3)]">
             <Image
               src={service.image || "/images/automation-hero.jpg"}
               alt={service.title}
@@ -123,7 +129,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               priority
               sizes="(max-width: 1280px) 100vw, 1280px"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050b18]/95 via-[#050b18]/45 to-transparent" />
 
             {/* Bottom Overlay Telemetry Badges */}
             <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-4 text-white">
@@ -370,6 +376,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
       <FloatingWhatsApp />
       <Footer settings={settings} />
+      </div>
     </main>
   );
 }

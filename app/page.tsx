@@ -102,11 +102,20 @@ export default async function HomePage() {
   const { settings, navigation, homeData } = await getHomeData();
 
   return (
-    <main className="min-h-screen flex flex-col bg-slate-50 dark:bg-navy-950 text-slate-900 dark:text-slate-100 transition-colors">
-      <Navbar settings={settings} navItems={navigation} />
-      <DynamicSectionRenderer data={homeData} />
-      <FloatingWhatsApp />
-      <Footer settings={settings} services={homeData.services} navItems={navigation} />
+    <main className="page-shell relative min-h-screen flex flex-col bg-slate-50 dark:bg-[#050b18] text-slate-900 dark:text-slate-100 transition-colors overflow-hidden">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="ambient-orb ambient-orb-red" />
+        <div className="ambient-orb ambient-orb-cyan" />
+      </div>
+
+      <div className="relative z-10">
+        <Navbar settings={settings} navItems={navigation} />
+        <div className="pt-2">
+          <DynamicSectionRenderer data={homeData} />
+        </div>
+        <FloatingWhatsApp />
+        <Footer settings={settings} services={homeData.services} navItems={navigation} />
+      </div>
     </main>
   );
 }

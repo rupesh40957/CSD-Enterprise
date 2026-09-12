@@ -9,7 +9,7 @@ interface ScrollRevealProps {
   threshold?: number;
   once?: boolean;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 }
 
 export default function ScrollReveal({
@@ -21,7 +21,7 @@ export default function ScrollReveal({
   className = "",
   as: Tag = "div",
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement | null>(null);
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
@@ -62,13 +62,14 @@ export default function ScrollReveal({
 
   const staggerClass = delay ? `stagger-${delay}` : "";
 
-  return (
-    // @ts-expect-error - dynamic tag element
-    <Tag
-      ref={ref}
-      className={`scroll-reveal ${directionClass} ${staggerClass} ${revealed ? "revealed" : ""} ${className}`}
-    >
-      {children}
-    </Tag>
+  const Component = Tag as keyof React.JSX.IntrinsicElements;
+
+  return React.createElement(
+    Component,
+    {
+      ref: ref as React.Ref<HTMLElement>,
+      className: `scroll-reveal ${directionClass} ${staggerClass} ${revealed ? "revealed" : ""} ${className}`,
+    },
+    children
   );
 }
