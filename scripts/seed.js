@@ -1,10 +1,11 @@
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config();
+require('dotenv').config({ path: '.env.local', override: true });
 const { MongoClient } = require('mongodb');
 
 const uri = process.env.MONGODB_URI;
 
 if (!uri) {
-  console.error('Error: MONGODB_URI is not defined in .env.local');
+  console.error('Error: MONGODB_URI is not defined in environment variables (.env / .env.local)');
   process.exit(1);
 }
 
