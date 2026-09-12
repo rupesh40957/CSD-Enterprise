@@ -56,7 +56,7 @@ export default function IndustriesSection({ industries = [] }: IndustriesSection
             return (
               <div
                 key={ind.slug || String(ind._id)}
-                className="glass-panel rounded-2xl overflow-hidden group hover:border-cyan-500/40 transition-all duration-300 shadow-sm flex flex-col justify-between"
+                className="glass-panel rounded-2xl overflow-hidden group hover:border-red-500/40 dark:hover:border-red-500/30 transition-all duration-300 shadow-sm flex flex-col justify-between card-hover"
               >
                 <div>
                   <div className="relative h-44 w-full bg-navy-950 overflow-hidden">

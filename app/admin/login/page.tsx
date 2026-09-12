@@ -97,9 +97,9 @@ function AdminLoginForm() {
   };
 
   return (
-    <div className="w-full max-w-lg">
+    <div className="w-full max-w-lg z-10 animate-fade-in-up">
       {/* Security Card */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl border border-slate-200 dark:border-red-500/20 relative overflow-hidden">
+      <div className="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl border border-slate-200/90 dark:border-red-500/25 relative overflow-hidden">
         {/* Top Gradient Stripe */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 via-rose-500 to-amber-500" />
 
@@ -112,6 +112,7 @@ function AdminLoginForm() {
               width={54}
               height={54}
               className="object-contain"
+              priority
             />
           </div>
           <h1 className="text-2xl font-black tracking-tight text-navy-950 dark:text-white flex items-center gap-2">
@@ -119,13 +120,13 @@ function AdminLoginForm() {
             <span>Admin Gateway</span>
             <ShieldCheck className="w-5 h-5 text-red-600 dark:text-red-500" />
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">
             Authorized Engineering &amp; Operations Portal
           </p>
         </div>
 
         {/* Dual Admin Selection & Credentials Helper */}
-        <div className="mb-6 p-4 rounded-2xl bg-slate-50 dark:bg-navy-900/90 border border-red-500/20 text-xs shadow-inner">
+        <div className="mb-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-navy-900/90 border border-red-500/20 text-xs shadow-inner">
           <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-navy-800">
             <div className="font-bold text-red-600 dark:text-red-400 flex items-center gap-1.5">
               <KeyRound className="w-4 h-4 text-red-500" />
@@ -146,10 +147,10 @@ function AdminLoginForm() {
                   setSelectedAdminId(acc.id);
                   handleAutoFill(acc);
                 }}
-                className={`py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                className={`py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 btn-press ${
                   selectedAdminId === acc.id
-                    ? "bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-sm"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    ? "bg-red-600 text-white shadow-sm shadow-red-600/30"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-navy-900"
                 }`}
               >
                 <UserCheck className="w-3.5 h-3.5" />
@@ -159,11 +160,11 @@ function AdminLoginForm() {
           </div>
 
           {/* Active Admin Details */}
-          <div className="space-y-1.5 font-mono text-[11px]">
-            <div className="flex items-center justify-between bg-white dark:bg-navy-950/80 px-3 py-2 rounded-xl border border-slate-200 dark:border-navy-800">
+          <div className="space-y-2 font-mono text-[11px]">
+            <div className="flex items-center justify-between bg-white dark:bg-navy-950/80 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-800 shadow-sm">
               <span className="text-slate-500 dark:text-slate-400 font-sans text-xs">Email:</span>
               <div className="flex items-center gap-2">
-                <code className="text-red-600 dark:text-red-400 font-semibold">{currentAdmin.email}</code>
+                <code className="text-red-600 dark:text-red-400 font-bold">{currentAdmin.email}</code>
                 <button
                   type="button"
                   onClick={() => copyToClipboard(currentAdmin.email, "email")}
@@ -175,10 +176,10 @@ function AdminLoginForm() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between bg-white dark:bg-navy-950/80 px-3 py-2 rounded-xl border border-slate-200 dark:border-navy-800">
+            <div className="flex items-center justify-between bg-white dark:bg-navy-950/80 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-800 shadow-sm">
               <span className="text-slate-500 dark:text-slate-400 font-sans text-xs">Generated Password:</span>
               <div className="flex items-center gap-2">
-                <code className="text-red-600 dark:text-red-400 font-semibold">{currentAdmin.password}</code>
+                <code className="text-red-600 dark:text-red-400 font-bold">{currentAdmin.password}</code>
                 <button
                   type="button"
                   onClick={() => copyToClipboard(currentAdmin.password, "password")}
@@ -200,10 +201,10 @@ function AdminLoginForm() {
             <button
               type="button"
               onClick={() => handleAutoFill(currentAdmin)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-xl shrink-0 transition-all flex items-center gap-1.5 shadow-sm ${
+              className={`px-3 py-1.5 text-xs font-bold rounded-xl shrink-0 transition-all flex items-center gap-1.5 shadow-sm btn-press ${
                 justAutoFilled
                   ? "bg-emerald-500 text-white scale-105"
-                  : "bg-red-600 hover:bg-red-500 text-white active:scale-95"
+                  : "bg-red-600 hover:bg-red-500 text-white active:scale-95 shadow-red-600/25"
               }`}
             >
               {justAutoFilled ? (
@@ -248,7 +249,7 @@ function AdminLoginForm() {
                 placeholder="admin@csdenterprises.in"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-white dark:bg-navy-900 border border-slate-300 dark:border-navy-700 focus:border-red-500 focus:outline-none dark:text-white transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-white dark:bg-navy-900 border border-slate-300 dark:border-navy-700 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none dark:text-white transition-all"
               />
             </div>
           </div>
@@ -271,7 +272,7 @@ function AdminLoginForm() {
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl text-sm bg-white dark:bg-navy-900 border border-slate-300 dark:border-navy-700 focus:border-red-500 focus:outline-none dark:text-white transition-colors"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl text-sm bg-white dark:bg-navy-900 border border-slate-300 dark:border-navy-700 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none dark:text-white transition-all"
               />
               <button
                 type="button"
@@ -287,7 +288,7 @@ function AdminLoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 px-4 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 shadow-md shadow-red-600/25 transition-all duration-200 disabled:opacity-50 mt-2"
+            className="w-full py-3.5 px-4 rounded-xl text-sm font-bold text-white bg-red-600 hover:bg-red-700 shadow-lg shadow-red-600/30 btn-press transition-all duration-200 disabled:opacity-50 mt-2"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-2">
@@ -301,7 +302,7 @@ function AdminLoginForm() {
         </form>
 
         <div className="mt-8 pt-6 border-t border-slate-200 dark:border-navy-800/80 text-center">
-          <p className="text-[11px] text-slate-500 dark:text-slate-400">
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
             Signed HTTP-Only JWT Session with Database Verification.
             <br />
             Includes mandatory password change workflow for temporary keys.
@@ -314,22 +315,24 @@ function AdminLoginForm() {
 
 export default function AdminLoginPage() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 tech-grid bg-slate-100 dark:bg-navy-950 transition-colors">
-      <div className="absolute top-6 left-6 flex items-center gap-3">
+    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 tech-grid-vignette bg-slate-100 dark:bg-navy-950 transition-colors relative overflow-hidden">
+      {/* Top Left: Back to Website */}
+      <div className="absolute top-6 left-6 z-20">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-red-600 bg-white dark:bg-navy-900 border border-slate-200 dark:border-navy-800 shadow-sm transition-colors"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 bg-white/90 dark:bg-navy-900/90 border border-slate-200/90 dark:border-navy-800 shadow-sm backdrop-blur-md transition-all hover:scale-105 btn-press"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Website</span>
         </Link>
       </div>
 
-      <div className="absolute top-6 right-6">
+      {/* Top Right: Theme Toggle */}
+      <div className="absolute top-6 right-6 z-20">
         <ThemeToggle />
       </div>
 
-      <Suspense fallback={<div className="text-sm text-slate-400">Loading...</div>}>
+      <Suspense fallback={<div className="text-sm text-slate-400">Loading Admin Portal...</div>}>
         <AdminLoginForm />
       </Suspense>
     </div>

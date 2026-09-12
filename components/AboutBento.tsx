@@ -164,10 +164,10 @@ export default function AboutBento({ about }: AboutBentoProps) {
           {cards.map((card) => (
             <div
               key={card.id}
-              className="flex flex-col items-center text-center group transition-all duration-300 p-4 rounded-3xl hover:bg-slate-50/60 dark:hover:bg-navy-900/40"
+              className="flex flex-col items-center text-center group transition-all duration-300 p-5 rounded-3xl hover:bg-slate-50/80 dark:hover:bg-navy-900/40 card-hover"
             >
               {/* Circular Image Container */}
-              <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-slate-200/80 dark:border-navy-700/80 shadow-md group-hover:border-red-500/50 group-hover:shadow-xl group-hover:shadow-red-500/15 group-hover:scale-105 transition-all duration-300 mb-6 bg-slate-100 dark:bg-navy-900">
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-slate-200/90 dark:border-navy-700/80 shadow-md group-hover:border-red-500/60 group-hover:shadow-xl group-hover:shadow-red-500/20 group-hover:scale-105 transition-all duration-300 mb-6 bg-slate-100 dark:bg-navy-900">
                 <Image
                   src={card.image}
                   alt={card.title}

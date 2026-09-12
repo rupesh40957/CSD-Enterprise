@@ -215,7 +215,7 @@ export default function Footer({ settings, services = [], navItems = [] }: Foote
                   type="submit"
                   disabled={status === "loading"}
                   aria-label="Subscribe to newsletter"
-                  className="absolute right-1.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-navy-950 font-bold"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold transition-all btn-press shadow-sm shadow-red-600/20"
                 >
                   <Send className="w-3.5 h-3.5" />
                 </button>

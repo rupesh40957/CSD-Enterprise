@@ -168,10 +168,10 @@ export default function ContactSection() {
           <div className="lg:col-span-7">
             <div className="glass-panel rounded-3xl p-8 sm:p-10 border border-slate-200 dark:border-cyan-500/20 shadow-xl relative">
               <h3 className="text-xl sm:text-2xl font-bold text-navy-950 dark:text-white mb-2">
-                Request for Proposal (RFP) / B2B Inquiry
+                Request for Proposal / Inquiry
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-6">
-                Please complete the form below. All inquiries are saved to our secure database for engineering review.
+                Please complete the form below. All inquiries are saved.
               </p>
 
               {status === "success" && (
@@ -295,7 +295,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 shadow-md transition-all duration-200 disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 shadow-md shadow-red-600/25 transition-all duration-200 disabled:opacity-50 btn-press"
                 >
                   {status === "loading" ? (
                     <span className="flex items-center gap-2">

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+  <!-- Bharat Petroleum Corporation Limited (BPCL) Official Emblem -->
+  <circle cx="150" cy="150" r="140" fill="#00529b" stroke="#ffcb05" stroke-width="6"/>
+  <circle cx="150" cy="150" r="130" fill="none" stroke="#ffffff" stroke-width="2" stroke-opacity="0.3"/>
+  
+  <!-- BPCL Iconic Yellow Flame / Hydrocarbon Droplet -->
+  <defs>
+    <linearGradient id="bpclYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff000" />
+      <stop offset="50%" stop-color="#ffcc00" />
+      <stop offset="100%" stop-color="#f5a623" />
+    </linearGradient>
+  </defs>
+
+  <!-- Stylized Flame Petals -->
+  <!-- Left Petal -->
+  <path d="M 125 140 C 110 115, 125 90, 138 78 C 130 95, 138 115, 142 125 Z" fill="url(#bpclYellow)" />
+  <!-- Center Main Flame -->
+  <path d="M 150 62 C 168 85, 185 110, 172 142 C 165 115, 155 100, 150 62 Z" fill="#ffffff" />
+  <!-- Dynamic Droplet Base -->
+  <path d="M 150 75 C 190 120, 195 170, 150 190 C 105 170, 110 120, 150 75 Z" fill="url(#bpclYellow)" />
+  <circle cx="150" cy="155" r="18" fill="#00529b" />
+  <circle cx="150" cy="155" r="10" fill="#ffffff" />
+
+  <!-- Text: Bharat Petroleum / BPCL -->
+  <text x="150" y="228" font-family="'Arial Black', sans-serif" font-weight="900" font-size="16" fill="#ffffff" text-anchor="middle" letter-spacing="1.5">BHARAT PETROLEUM</text>
+  <text x="150" y="254" font-family="'Arial Black', sans-serif" font-weight="bold" font-size="15" fill="#ffcb05" text-anchor="middle" letter-spacing="3">BPCL</text>
+</svg>

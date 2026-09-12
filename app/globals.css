@@ -47,7 +47,13 @@ body {
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 229, 255, 0.6);
+  background: rgba(220, 38, 38, 0.6);
+}
+
+/* Smooth scrolling with sticky header offset */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 /* Engineering technical grid pattern */
@@ -64,19 +70,119 @@ body {
     linear-gradient(to bottom, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
 }
 
+/* Vignette radial overlay for tech grid (used in Login and hero sections) */
+.tech-grid-vignette {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0) 40%, rgba(224, 242, 254, 0.45) 100%),
+              linear-gradient(to right, rgba(0, 229, 255, 0.06) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0, 229, 255, 0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+}
+
+.dark .tech-grid-vignette {
+  background: radial-gradient(circle at center, rgba(6, 11, 24, 0.4) 40%, rgba(11, 25, 44, 0.8) 100%),
+              linear-gradient(to right, rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+}
+
 /* Glassmorphism */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.85);
 }
 
 .dark .glass-panel {
-  background: rgba(11, 19, 43, 0.75);
+  background: rgba(11, 19, 43, 0.82);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+/* Card hover lift & elevation */
+.card-hover {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+  will-change: transform;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(220, 38, 38, 0.08);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5), 0 4px 12px -2px rgba(239, 68, 68, 0.18);
+}
+
+/* Button micro-interaction */
+.btn-press {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+/* Red Glow Effects */
+.red-glow {
+  box-shadow: 0 0 25px -4px rgba(220, 38, 38, 0.35);
+}
+
+.dark .red-glow {
+  box-shadow: 0 0 35px -4px rgba(239, 68, 68, 0.3);
+}
+
+/* Cyan glow */
+.cyan-glow {
+  box-shadow: 0 0 25px -5px rgba(0, 229, 255, 0.25);
+}
+
+.dark .cyan-glow {
+  box-shadow: 0 0 35px -5px rgba(0, 229, 255, 0.2);
+}
+
+/* Keyframe Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 3s ease-in-out infinite;
 }
 
 /* Infinite Marquee Animation */
@@ -99,11 +205,31 @@ body {
   animation-play-state: paused;
 }
 
-/* Subtle glow effects */
-.cyan-glow {
-  box-shadow: 0 0 25px -5px rgba(0, 229, 255, 0.25);
-}
+/* Accessibility: prefers-reduced-motion Support */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
 
-.dark .cyan-glow {
-  box-shadow: 0 0 35px -5px rgba(0, 229, 255, 0.2);
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .card-hover:hover {
+    transform: none !important;
+  }
+
+  .btn-press:active {
+    transform: none !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+    overflow-x: auto;
+  }
 }

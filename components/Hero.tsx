@@ -95,7 +95,7 @@ export default function Hero({ slides }: HeroProps) {
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href={currentSlide.primaryCtaUrl || "#services"}
-                className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:scale-[1.01] transition-all duration-200 active:scale-[0.98]"
+                className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-base font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 rounded-xl shadow-lg shadow-red-600/25 hover:shadow-red-600/35 transition-all duration-200 btn-press"
               >
                 <span>{currentSlide.primaryCtaText}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -103,7 +103,7 @@ export default function Hero({ slides }: HeroProps) {
               {currentSlide.secondaryCtaText && (
                 <Link
                   href={currentSlide.secondaryCtaUrl || "#projects"}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-navy-900/80 dark:hover:bg-navy-800 border border-slate-300/80 dark:border-cyan-500/20 rounded-xl transition-all duration-200"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-navy-900/80 dark:hover:bg-navy-800 border border-slate-300/80 dark:border-slate-700 rounded-xl transition-all duration-200 btn-press"
                 >
                   <span>{currentSlide.secondaryCtaText}</span>
                 </Link>

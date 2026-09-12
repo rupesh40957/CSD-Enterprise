@@ -150,7 +150,7 @@ export default function ServicesSection({ services = [] }: ServicesSectionProps)
                   key={cat.id}
                   type="button"
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all btn-press ${
                     activeCategory === cat.id
                       ? "bg-red-600 text-white shadow-sm shadow-red-600/25 font-bold"
                       : "bg-white dark:bg-navy-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-navy-800"
@@ -166,7 +166,7 @@ export default function ServicesSection({ services = [] }: ServicesSectionProps)
               <button
                 type="button"
                 onClick={() => setViewMode("spotlight")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all btn-press ${
                   viewMode === "spotlight"
                     ? "bg-navy-950 text-white dark:bg-red-600 shadow-sm"
                     : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
@@ -179,7 +179,7 @@ export default function ServicesSection({ services = [] }: ServicesSectionProps)
               <button
                 type="button"
                 onClick={() => setViewMode("grid")}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all btn-press ${
                   viewMode === "grid"
                     ? "bg-navy-950 text-white dark:bg-red-600 shadow-sm"
                     : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
@@ -364,7 +364,7 @@ export default function ServicesSection({ services = [] }: ServicesSectionProps)
               return (
                 <div
                   key={service.slug || String(service._id)}
-                  className="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-navy-800 hover:border-red-500/40 dark:hover:border-red-500/30 shadow-md hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300 flex flex-col justify-between bg-white dark:bg-navy-900/80 group"
+                  className="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-navy-800 hover:border-red-500/40 dark:hover:border-red-500/30 shadow-md hover:shadow-xl hover:shadow-red-500/5 transition-all duration-300 flex flex-col justify-between bg-white dark:bg-navy-900/80 group card-hover"
                 >
                   <div>
                     {/* Top Number & Icon Node */}

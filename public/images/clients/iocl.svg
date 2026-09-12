@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
+  <!-- Indian Oil Official Corporate Emblem -->
+  <circle cx="150" cy="150" r="142" fill="#002d62" stroke="#f47920" stroke-width="6"/>
+  
+  <!-- Outer Ring with Bilingual Text -->
+  <!-- Top Arc Saffron -->
+  <path d="M 45 150 A 105 105 0 0 1 255 150 Z" fill="#f47920" />
+  <!-- Bottom Arc Saffron -->
+  <path d="M 45 150 A 105 105 0 0 0 255 150 Z" fill="#f47920" />
+  
+  <!-- Central White Band -->
+  <rect x="30" y="126" width="240" height="48" rx="6" fill="#ffffff" stroke="#002d62" stroke-width="3"/>
+  
+  <!-- IndianOil Text inside white band -->
+  <text x="150" y="159" font-family="'Arial Black', 'Helvetica Black', sans-serif" font-weight="900" font-size="28" fill="#002d62" text-anchor="middle" letter-spacing="1">IndianOil</text>
+  
+  <!-- Top text: इंडियनऑयल -->
+  <text x="150" y="98" font-family="'Noto Sans', 'Arial', sans-serif" font-weight="bold" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="2">इंडियनऑयल</text>
+  
+  <!-- Bottom text: IOCL -->
+  <text x="150" y="215" font-family="'Arial Black', sans-serif" font-weight="900" font-size="22" fill="#ffffff" text-anchor="middle" letter-spacing="4">IOCL</text>
+</svg>
