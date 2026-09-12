@@ -39,8 +39,10 @@ export default function CtaSection({ cta }: CtaSectionProps) {
             src={data.backgroundImage}
             alt="CSD Enterprises Industrial Infrastructure"
             fill
+            sizes="100vw"
             className="object-cover opacity-20"
           />
+
           <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-950/80" />
         </div>
       )}

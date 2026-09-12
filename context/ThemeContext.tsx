@@ -19,14 +19,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem("csd_theme") as Theme | null;
-    if (stored === "light" || stored === "dark") {
-      setThemeState(stored);
-      applyTheme(stored);
+    if (stored === "light") {
+      setThemeState("light");
+      applyTheme("light");
     } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const initial = prefersDark ? "dark" : "light";
-      setThemeState(initial);
-      applyTheme(initial);
+      setThemeState("dark");
+      applyTheme("dark");
     }
   }, []);
 
@@ -48,7 +46,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
+    const isCurrentlyDark = typeof document !== "undefined"
+      ? document.documentElement.classList.contains("dark")
+      : theme === "dark";
+    const next = isCurrentlyDark ? "light" : "dark";
     setTheme(next);
   };
 

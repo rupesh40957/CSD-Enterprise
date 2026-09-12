@@ -64,8 +64,10 @@ export default function IndustriesSection({ industries = [] }: IndustriesSection
                       src={ind.image || "/images/industrial-facility.jpg"}
                       alt={ind.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover opacity-85 group-hover:scale-105 transition-transform duration-500"
                     />
+
                     <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent" />
                     <div className="absolute top-3 left-3 w-9 h-9 rounded-xl bg-navy-900/90 border border-cyan-500/30 flex items-center justify-center text-cyan-400 backdrop-blur-sm">
                       <Icon className="w-4 h-4" />

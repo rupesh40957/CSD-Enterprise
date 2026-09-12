@@ -44,8 +44,10 @@ export default function BlogSection({ blogPosts = [] }: BlogSectionProps) {
                     src={post.coverImage || "/images/industrial-facility.jpg"}
                     alt={post.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
                   />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent" />
                   <div className="absolute top-3 left-3">
                     <span className="px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wide uppercase bg-navy-900/90 text-cyan-400 border border-cyan-500/30 backdrop-blur-sm">

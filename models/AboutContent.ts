@@ -1,5 +1,14 @@
 import { ObjectId } from "mongodb";
 
+export interface AboutCard {
+  id?: string;
+  title: string;
+  description?: string;
+  image: string;
+  list?: string[];
+}
+
+
 export interface AboutCoreValue {
   icon: string;
   title: string;
@@ -20,6 +29,14 @@ export interface AboutContent {
   statsOffshoreSub: string;
   statsOnshore: string;
   statsOnshoreSub: string;
+  bannerImage?: string;
+  establishmentImage?: string;
+  visionImage?: string;
+  approachImage?: string;
+  expertiseImage?: string;
+  managementImage?: string;
+  coreValuesImage?: string;
+  cards?: AboutCard[];
   coreValues: AboutCoreValue[];
   updatedAt?: Date;
 }

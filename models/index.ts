@@ -16,3 +16,4 @@ export * from "./BlogPost";
 export * from "./Faq";
 export * from "./CtaContent";
 export * from "./Media";
+export * from "./AdminUser";

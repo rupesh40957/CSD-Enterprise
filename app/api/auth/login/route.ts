@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export async function POST(request: NextRequest) {
   try {
     const ip = request.headers.get("x-forwarded-for") || "local-client";
-    const allowed = checkRateLimit(`login-${ip}`, 5, 60000); // 5 attempts per minute max
+    const allowed = checkRateLimit(`login-${ip}`, 10, 60000); // 10 attempts per minute max
     if (!allowed) {
       return NextResponse.json(
         { error: "Too many login attempts. Please wait 60 seconds before trying again." },
@@ -27,19 +27,28 @@ export async function POST(request: NextRequest) {
     }
 
     const { email, password } = parseResult.data;
-    const isValid = await verifyAdminCredentials(email, password);
+    const authResult = await verifyAdminCredentials(email, password);
 
-    if (!isValid) {
+    if (!authResult.valid || !authResult.admin) {
       return NextResponse.json(
         { error: "Invalid administrator email or password." },
         { status: 401 }
       );
     }
 
-    const token = await createSessionToken(email);
+    const { email: adminEmail, role, mustChangePassword, name } = authResult.admin;
+    const token = await createSessionToken(adminEmail, role, mustChangePassword, name);
+
     const response = NextResponse.json({
       success: true,
       message: "Authentication successful.",
+      mustChangePassword,
+      user: {
+        email: adminEmail,
+        name,
+        role,
+        mustChangePassword,
+      },
     });
 
     response.cookies.set({

@@ -63,7 +63,7 @@ export default function DatabaseHealth({
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-lg font-bold text-navy-950 dark:text-white">
-                MongoDB Atlas Cluster Health
+                DATABASE Cluster Health
               </h3>
               <span
                 className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
@@ -88,7 +88,7 @@ export default function DatabaseHealth({
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 shadow-sm transition-all disabled:opacity-50"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${checking ? "animate-spin" : ""}`} />
-          <span>{checking ? "Pinging Atlas..." : "Test Connection"}</span>
+          <span>{checking ? "Pinging Database..." : "Test Connection"}</span>
         </button>
       </div>
 

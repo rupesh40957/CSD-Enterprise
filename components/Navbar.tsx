@@ -39,7 +39,7 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
     ? navItems.filter((i) => i.isActive)
     : DEFAULT_NAV;
 
-  const logoSrc = settings?.logo || "/logo/csd-logo.png";
+  const logoSrc = settings?.logo && settings.logo !== "/logo/csd-logo.png" ? settings.logo : "/logo/csd-logo.svg";
   const companyName = settings?.companyName || "CSD Enterprises";
   const tagline = settings?.tagline || "Automation & Technologies";
 
@@ -47,7 +47,7 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 dark:bg-navy-950/90 backdrop-blur-md shadow-lg shadow-black/5 dark:shadow-cyan-950/20 border-b border-slate-200/80 dark:border-cyan-500/10 py-3"
+          ? "bg-white/90 dark:bg-navy-950/90 backdrop-blur-md shadow-lg shadow-black/5 dark:shadow-red-950/20 border-b border-slate-200/80 dark:border-red-500/15 py-3"
           : "bg-transparent py-4"
       }`}
     >
@@ -55,7 +55,7 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
         <div className="flex items-center justify-between">
           {/* Brand Logo & Name */}
           <Link href="#hero" className="flex items-center gap-3 group focus:outline-none">
-            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden bg-white dark:bg-navy-900 p-1.5 border border-slate-200 dark:border-cyan-500/30 shadow-sm flex items-center justify-center transition-transform group-hover:scale-105">
+            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden bg-white dark:bg-navy-900 p-1.5 border border-slate-200 dark:border-red-500/30 shadow-sm shadow-red-500/10 flex items-center justify-center transition-transform group-hover:scale-105">
               <Image
                 src={logoSrc}
                 alt={`${companyName} Logo`}
@@ -66,8 +66,8 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg sm:text-xl font-extrabold tracking-tight text-navy-950 dark:text-white flex items-center gap-1.5">
-                <span>CSD</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400">Enterprises</span>
+              <span className="text-lg sm:text-xl font-black tracking-tight text-red-600 dark:text-red-500 flex items-center gap-1.5">
+                <span>CSD</span> <span className="text-red-600 dark:text-red-400">Enterprises</span>
               </span>
               <span className="text-[10px] tracking-wider uppercase font-semibold text-slate-500 dark:text-slate-400 line-clamp-1">
                 {tagline}

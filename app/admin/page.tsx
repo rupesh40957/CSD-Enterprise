@@ -12,6 +12,7 @@ import ProjectsManager from "@/components/admin/ProjectsManager";
 import DatabaseHealth from "@/components/admin/DatabaseHealth";
 import SectionsManager from "@/components/admin/SectionsManager";
 import HeroSlidesManager from "@/components/admin/HeroSlidesManager";
+import AboutManager from "@/components/admin/AboutManager";
 import WebsiteSettingsManager from "@/components/admin/WebsiteSettingsManager";
 import ServicesManager from "@/components/admin/ServicesManager";
 import IndustriesManager from "@/components/admin/IndustriesManager";
@@ -24,6 +25,7 @@ import StatsManager from "@/components/admin/StatsManager";
 import CtaManager from "@/components/admin/CtaManager";
 import NavigationManager from "@/components/admin/NavigationManager";
 import MediaManager from "@/components/admin/MediaManager";
+import ChangePasswordModal from "@/components/admin/ChangePasswordModal";
 import { Inquiry, InquiryStatus } from "@/models/Inquiry";
 import { Subscriber } from "@/models/Subscriber";
 import { Project } from "@/models/Project";
@@ -33,6 +35,15 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<AdminTab>("overview");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [dbConnected, setDbConnected] = useState(true);
+
+  // Admin Session State
+  const [adminSession, setAdminSession] = useState<{
+    email: string;
+    role: string;
+    name: string;
+    mustChangePassword: boolean;
+  } | null>(null);
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
 
   // Stats
   const [counts, setCounts] = useState({
@@ -153,13 +164,30 @@ export default function AdminPage() {
     }
   }, []);
 
+  // Check Admin Session & MustChangePassword
+  const fetchSession = useCallback(async () => {
+    try {
+      const res = await fetch("/api/auth/session");
+      if (res.ok) {
+        const data = await res.json();
+        setAdminSession(data);
+        if (data.mustChangePassword) {
+          setPasswordModalOpen(true);
+        }
+      }
+    } catch {
+      // Session fetch error handled
+    }
+  }, []);
+
   // Initial Load
   useEffect(() => {
+    fetchSession();
     checkHealth();
     fetchInquiries();
     fetchSubscribers();
     fetchProjects();
-  }, [checkHealth, fetchInquiries, fetchSubscribers, fetchProjects]);
+  }, [fetchSession, checkHealth, fetchInquiries, fetchSubscribers, fetchProjects]);
 
   // Inquiry Status Change
   const handleStatusChange = async (id: string, newStatus: InquiryStatus) => {
@@ -219,6 +247,8 @@ export default function AdminPage() {
         return "Home Page Section Order & Visibility";
       case "hero":
         return "Hero Carousel Slide Manager";
+      case "about":
+        return "Company Ethos & About Us Section";
       case "settings":
         return "Website Settings & Brand Configuration";
       case "services":
@@ -266,6 +296,9 @@ export default function AdminPage() {
           title={getTabTitle()}
           dbConnected={dbConnected}
           onOpenMobileMenu={() => setMobileSidebarOpen(true)}
+          adminEmail={adminSession?.email}
+          adminRole={adminSession?.role}
+          onOpenPasswordModal={() => setPasswordModalOpen(true)}
         />
 
         <main className="flex-1 p-6 sm:p-8 max-w-7xl w-full mx-auto">
@@ -317,6 +350,7 @@ export default function AdminPage() {
 
           {activeTab === "sections" && <SectionsManager />}
           {activeTab === "hero" && <HeroSlidesManager />}
+          {activeTab === "about" && <AboutManager />}
           {activeTab === "settings" && <WebsiteSettingsManager />}
           {activeTab === "services" && <ServicesManager />}
           {activeTab === "industries" && <IndustriesManager />}
@@ -354,6 +388,18 @@ export default function AdminPage() {
           onDelete={handleDeleteInquiry}
         />
       )}
+
+      {/* Password Change Modal Window */}
+      <ChangePasswordModal
+        isOpen={passwordModalOpen}
+        isForced={Boolean(adminSession?.mustChangePassword)}
+        userEmail={adminSession?.email}
+        onClose={() => setPasswordModalOpen(false)}
+        onSuccess={() => {
+          setPasswordModalOpen(false);
+          setAdminSession((prev) => (prev ? { ...prev, mustChangePassword: false } : null));
+        }}
+      />
     </div>
   );
 }

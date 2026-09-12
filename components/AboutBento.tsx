@@ -1,178 +1,207 @@
 "use client";
 
 import React from "react";
-import {
-  ShieldCheck,
-  Star,
-  Users,
-  Cpu,
-  Target,
-  Award,
-  CheckCircle,
-  Zap,
-} from "lucide-react";
+import Image from "next/image";
 import { AboutContent } from "@/models";
+import { Sparkles, CheckCircle2 } from "lucide-react";
 
 interface AboutBentoProps {
   about?: AboutContent | null;
 }
 
-const ICON_MAP: Record<string, React.ElementType> = {
-  ShieldCheck,
-  Star,
-  Users,
-  Cpu,
-  Target,
-  Award,
-  CheckCircle,
-  Zap,
-};
+interface AboutSectionCard {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  list?: string[];
+}
 
-const DEFAULT_ABOUT: AboutContent = {
-  badge: "Company Background & Ethos",
-  heading: "Engineering Precision Built for India's Critical Infrastructure",
-  description:
-    "Formed in 2019, CSD Enterprises serves as an elite industrial system integrator and turnkey engineering partner across offshore deepwater facilities and onshore industrial plants nationwide.",
-  visionTitle: "Our Vision & Strategic Approach",
-  visionDescription:
-    "We take a personalized, hands-on engineering approach to every client requirement—working closely with plant engineers, operations chiefs, and defense coordinators to deploy tailored automation, surveillance, and telemetry systems.",
-  experienceBadge: "Established 2019",
-  statsOffshore: "Offshore",
-  statsOffshoreSub: "Deepwater Satcom & SCADA",
-  statsOnshore: "Onshore",
-  statsOnshoreSub: "Power, Oil, Gas & Police",
-  coreValues: [
-    {
-      icon: "ShieldCheck",
-      title: "Integrity",
-      description:
-        "Transparent engineering practices, uncompromised industrial safety compliance, and ethical client engagements across hazardous and defense facilities.",
-      highlight: "Safety & Compliance First",
-      color: "from-blue-500/20 to-cyan-500/20 text-cyan-400",
-    },
-    {
-      icon: "Star",
-      title: "Excellence",
-      description:
-        "Rigorous adherence to global PLC/DCS, SCADA, and telecom engineering standards, ensuring fault-tolerant performance in high-stakes environments.",
-      highlight: "Industrial-Grade Reliability",
-      color: "from-amber-500/20 to-orange-500/20 text-amber-400",
-    },
-    {
-      icon: "Users",
-      title: "Collaboration",
-      description:
-        "Long-term engineering partnerships with India's largest PSUs, EPC contractors, telecom pioneers, and state law enforcement agencies.",
-      highlight: "Trusted Partner Ecosystem",
-      color: "from-emerald-500/20 to-teal-500/20 text-emerald-400",
-    },
-    {
-      icon: "Cpu",
-      title: "Innovation",
-      description:
-        "Pioneering IoT telemetry, solar-powered hydrometrology Automatic Weather Stations, and satellite earth stations for remote automated intelligence.",
-      highlight: "Next-Gen Telemetry & IoT",
-      color: "from-purple-500/20 to-cyan-500/20 text-purple-400",
-    },
-  ],
-};
+const DEFAULT_CARDS: AboutSectionCard[] = [
+  {
+    id: "establishment",
+    title: "Establishment",
+    description:
+      "We are system integrator was formed in 2019 and dedicated to delivering exceptional products and services to our clients offshore and onshore.",
+    image: "/images/about/establishment.jpg",
+  },
+  {
+    id: "vision",
+    title: "Our Vision",
+    description:
+      "Our vision is to provide top-notch services & we strive to provide outstanding solutions that exceed client expectations and foster long-term relationships.",
+    image: "/images/about/vision.jpg",
+  },
+  {
+    id: "approach",
+    title: "Our Approach",
+    description:
+      "We take a personalized approach to each client's needs, working closely with them to understand their unique challenges and develop customized solutions.",
+    image: "/images/about/approach.svg",
+  },
+  {
+    id: "expertise",
+    title: "Our Expertise",
+    description:
+      "We have experienced and expert professionals in PLC, SCADA, CCTV Surveillance System, IT & Networking Infrastructure, Hydrometeorology & Satcom for offshore & onshore locations.",
+    image: "/images/about/expertise.svg",
+  },
+  {
+    id: "management",
+    title: "Management & Employees",
+    description:
+      "Our management provides strategic direction, while our employees are dedicated to executing our vision with precision and care. Together, we work collaboratively to drive innovation, quality, and customer satisfaction.",
+    image: "/images/about/management.svg",
+  },
+  {
+    id: "core-values",
+    title: "Our Core Values",
+    description:
+      "Upholding the highest ethical standards, operational safety, and engineering excellence across every mission-critical deployment.",
+    image: "/images/about/core-values.svg",
+    list: ["Integrity", "Excellence", "Collaboration", "Innovation"],
+  },
+];
 
 export default function AboutBento({ about }: AboutBentoProps) {
-  const data = about || DEFAULT_ABOUT;
+  // If about data is customized in DB, map it or fallback to the reference image structure
+  const cards: AboutSectionCard[] = React.useMemo(() => {
+    if (about?.cards && about.cards.length > 0) {
+      return about.cards.map((c, idx) => ({
+        id: c.id || `card-${idx}`,
+        title: c.title,
+        description: c.description || "",
+        image: c.image || DEFAULT_CARDS[idx]?.image || "/images/about/establishment.jpg",
+        list:
+          c.list && c.list.length > 0
+            ? c.list
+            : c.id === "core-values" || idx === 5
+            ? about.coreValues && about.coreValues.length > 0
+              ? about.coreValues.map((v) => v.title)
+              : ["Integrity", "Excellence", "Collaboration", "Innovation"]
+            : undefined,
+      }));
+    }
+
+    return [
+      {
+        id: "establishment",
+        title: "Establishment",
+        description: about?.description || DEFAULT_CARDS[0].description,
+        image: about?.establishmentImage || "/images/about/establishment.jpg",
+      },
+      {
+        id: "vision",
+        title: about?.visionTitle || "Our Vision",
+        description: about?.visionDescription || DEFAULT_CARDS[1].description,
+        image: about?.visionImage || "/images/about/vision.jpg",
+      },
+      {
+        id: "approach",
+        title: "Our Approach",
+        description:
+          DEFAULT_CARDS[2].description,
+        image: about?.approachImage || "/images/about/approach.svg",
+      },
+      {
+        id: "expertise",
+        title: "Our Expertise",
+        description:
+          about?.statsOffshoreSub && about?.statsOnshoreSub
+            ? `We have experienced and expert professionals in PLC, SCADA, CCTV Surveillance System, IT & Networking Infrastructure, ${about.statsOffshoreSub} & ${about.statsOnshoreSub}.`
+            : DEFAULT_CARDS[3].description,
+        image: about?.expertiseImage || "/images/about/expertise.svg",
+      },
+      {
+        id: "management",
+        title: "Management & Employees",
+        description:
+          DEFAULT_CARDS[4].description,
+        image: about?.managementImage || "/images/about/management.svg",
+      },
+      {
+        id: "core-values",
+        title: "Our Core Values",
+        description:
+          "Upholding the highest ethical standards, operational safety, and engineering excellence across every mission-critical deployment.",
+        image: about?.coreValuesImage || "/images/about/core-values.svg",
+        list:
+          about?.coreValues && about.coreValues.length > 0
+            ? about.coreValues.map((v) => v.title)
+            : ["Integrity", "Excellence", "Collaboration", "Innovation"],
+      },
+    ];
+  }, [about]);
+
+  const badgeText = about?.badge || "Company Background & Ethos";
+  const headingText = about?.heading || "About Us";
 
   return (
-    <section id="about" className="py-24 bg-slate-50 dark:bg-navy-950/60 border-b border-slate-200 dark:border-navy-800/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-          <span className="px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 mb-3">
-            {data.badge}
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-950 dark:text-white tracking-tight">
-            {data.heading}
+    <section
+      id="about"
+      className="py-24 bg-white dark:bg-navy-950 border-b border-slate-200 dark:border-navy-800/80 transition-colors relative overflow-hidden"
+    >
+      {/* Background Ambient Glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-600/5 dark:bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Centered Section Header */}
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 mb-3.5 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-red-600 dark:text-red-500" />
+            <span>{badgeText}</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-navy-950 dark:text-white tracking-tight">
+            {headingText}
           </h2>
-          <p className="mt-4 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            {data.description}
-          </p>
+
+          <div className="w-16 h-1 bg-gradient-to-r from-red-600 to-rose-500 rounded-full mt-4 mb-2" />
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {/* Bento Story Card */}
-          <div className="md:col-span-12 lg:col-span-5 p-8 rounded-2xl glass-panel relative overflow-hidden flex flex-col justify-between shadow-sm">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-navy-900 text-cyan-400 text-xs font-semibold mb-6">
-                <Award className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{data.experienceBadge}</span>
+        {/* 3-Column Image + Description Layout (Exact Reference Style) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-14">
+          {cards.map((card) => (
+            <div
+              key={card.id}
+              className="flex flex-col items-center text-center group transition-all duration-300 p-4 rounded-3xl hover:bg-slate-50/60 dark:hover:bg-navy-900/40"
+            >
+              {/* Circular Image Container */}
+              <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-slate-200/80 dark:border-navy-700/80 shadow-md group-hover:border-red-500/50 group-hover:shadow-xl group-hover:shadow-red-500/15 group-hover:scale-105 transition-all duration-300 mb-6 bg-slate-100 dark:bg-navy-900">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 160px, 192px"
+                />
               </div>
-              <h3 className="text-2xl font-bold text-navy-950 dark:text-white mb-4">
-                {data.visionTitle}
+
+              {/* Title */}
+              <h3 className="text-xl sm:text-2xl font-bold text-navy-950 dark:text-white tracking-tight mb-3 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+                {card.title}
               </h3>
-              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">
-                {data.visionDescription}
-              </p>
-              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                Our experienced workforce spans certified PLC/SCADA specialists, optical fiber
-                cable engineers, explosion-proof installation masters, and satellite communication
-                experts handling offshore Mumbai High platforms to remote border stations.
-              </p>
-            </div>
 
-            <div className="grid grid-cols-2 gap-4 pt-8 mt-8 border-t border-slate-200 dark:border-navy-800">
-              <div className="p-3 rounded-xl bg-slate-100 dark:bg-navy-900/60 border border-slate-200 dark:border-cyan-500/10">
-                <div className="text-2xl font-bold text-navy-950 dark:text-cyan-400">
-                  {data.statsOffshore}
-                </div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">
-                  {data.statsOffshoreSub}
-                </div>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-100 dark:bg-navy-900/60 border border-slate-200 dark:border-cyan-500/10">
-                <div className="text-2xl font-bold text-navy-950 dark:text-cyan-400">
-                  {data.statsOnshore}
-                </div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">
-                  {data.statsOnshoreSub}
-                </div>
-              </div>
-            </div>
-          </div>
+              {/* Description */}
+              {card.description && !card.list && (
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs sm:max-w-sm">
+                  {card.description}
+                </p>
+              )}
 
-          {/* Core Values Bento Subgrid */}
-          <div className="md:col-span-12 lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {data.coreValues && data.coreValues.map((value) => {
-              const Icon = ICON_MAP[value.icon] || ShieldCheck;
-              return (
-                <div
-                  key={value.title}
-                  className="p-6 rounded-2xl glass-panel group hover:border-cyan-500/40 transition-all duration-300 shadow-sm flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${value.color || "from-blue-500/20 to-cyan-500/20 text-cyan-400"} flex items-center justify-center`}>
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-slate-100 dark:bg-navy-900 text-slate-600 dark:text-slate-300">
-                        {value.highlight}
-                      </span>
+              {/* Clean Vertical Values List for Card 6 (Exact Reference Style) */}
+              {card.list && card.list.length > 0 && (
+                <div className="flex flex-col items-center justify-center space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-medium">
+                  {card.list.map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-red-500" />
+                      <span>{item}</span>
                     </div>
-                    <h4 className="text-lg font-bold text-navy-950 dark:text-white mb-2 group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors">
-                      {value.title}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-3 border-t border-slate-200/60 dark:border-navy-800/80 flex items-center gap-1.5 text-xs font-semibold text-cyan-600 dark:text-cyan-400">
-                    <Target className="w-3.5 h-3.5" />
-                    <span>Proven Enterprise Track Record</span>
-                  </div>
+                  ))}
                 </div>
-              );
-            })}
-          </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>

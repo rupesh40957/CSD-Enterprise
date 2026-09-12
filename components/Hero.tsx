@@ -160,9 +160,11 @@ export default function Hero({ slides }: HeroProps) {
                   src={currentSlide.image || "/images/automation-hero.jpg"}
                   alt="Industrial Automation & Control Systems"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover opacity-85 hover:scale-105 transition-transform duration-700"
                   priority
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent" />
 
                 {/* SCADA Status Overlay Banner */}

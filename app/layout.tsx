@@ -86,8 +86,7 @@ export default function RootLayout({
             __html: `
               try {
                 const stored = localStorage.getItem('csd_theme');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (stored === 'light' || (!stored && !prefersDark)) {
+                if (stored === 'light') {
                   document.documentElement.classList.remove('dark');
                   document.documentElement.classList.add('light');
                 } else {

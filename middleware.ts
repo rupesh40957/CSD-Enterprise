@@ -10,7 +10,7 @@ async function isValidSession(token: string | undefined): Promise<boolean> {
   if (!token) return false;
   try {
     const { payload } = await jwtVerify(token, secretKey);
-    return payload.role === "admin" && payload.sub === "admin";
+    return (payload.role === "admin" || payload.role === "superadmin") && payload.sub === "admin";
   } catch {
     return false;
   }

@@ -50,6 +50,22 @@ export const loginSchema = z.object({
   password: z.string().min(1, "Password is required"),
 });
 
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, "Current password is required"),
+    newPassword: z
+      .string()
+      .min(8, "New password must be at least 8 characters")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one number"),
+    confirmPassword: z.string().min(1, "Please confirm your new password"),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "New password and confirmation do not match",
+    path: ["confirmPassword"],
+  });
+
 export const projectSchema = z.object({
   title: z.string().trim().min(3, "Title must be at least 3 characters"),
   slug: z.string().trim().optional(),
@@ -159,6 +175,14 @@ export const statisticSchema = z.object({
   isActive: z.boolean().default(true),
 });
 
+export const aboutCardSchema = z.object({
+  id: z.string().optional(),
+  title: z.string().trim().min(1, "Card title is required"),
+  description: z.string().trim().default(""),
+  image: z.string().trim().min(1, "Image is required"),
+  list: z.array(z.string()).optional(),
+});
+
 export const aboutContentSchema = z.object({
   badge: z.string().trim().min(1, "Badge is required"),
   heading: z.string().trim().min(3, "Heading is required"),
@@ -170,6 +194,14 @@ export const aboutContentSchema = z.object({
   statsOffshoreSub: z.string().trim().default("Mumbai High TSAT SCADA"),
   statsOnshore: z.string().trim().default("Onshore Industrial"),
   statsOnshoreSub: z.string().trim().default("Power, Oil & Gas, Police"),
+  bannerImage: z.string().trim().optional(),
+  establishmentImage: z.string().trim().optional(),
+  visionImage: z.string().trim().optional(),
+  approachImage: z.string().trim().optional(),
+  expertiseImage: z.string().trim().optional(),
+  managementImage: z.string().trim().optional(),
+  coreValuesImage: z.string().trim().optional(),
+  cards: z.array(aboutCardSchema).optional(),
   coreValues: z.array(
     z.object({
       icon: z.string().default("ShieldCheck"),
@@ -180,6 +212,7 @@ export const aboutContentSchema = z.object({
     })
   ),
 });
+
 
 export const serviceSchema = z.object({
   title: z.string().trim().min(3, "Title is required"),

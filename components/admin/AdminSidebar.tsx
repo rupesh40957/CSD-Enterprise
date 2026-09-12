@@ -26,12 +26,14 @@ import {
   Image as ImageIcon,
   Navigation2,
   X,
+  Info,
 } from "lucide-react";
 
 export type AdminTab =
   | "overview"
   | "sections"
   | "hero"
+  | "about"
   | "settings"
   | "navigation"
   | "services"
@@ -80,6 +82,7 @@ export default function AdminSidebar({
       items: [
         { id: "sections" as AdminTab, label: "Page Sections Order", icon: Layers },
         { id: "hero" as AdminTab, label: "Hero Carousel Slides", icon: Sparkles },
+        { id: "about" as AdminTab, label: "About Us & Ethos", icon: Info },
         { id: "stats" as AdminTab, label: "Company KPI Stats", icon: BarChart3 },
         { id: "cta" as AdminTab, label: "Consultation CTA", icon: Megaphone },
       ],
@@ -134,9 +137,9 @@ export default function AdminSidebar({
           {/* Top Logo & Title */}
           <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-navy-800">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white dark:bg-navy-900 p-1 border border-slate-200 dark:border-cyan-500/30 shadow-sm flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-white dark:bg-navy-900 p-1 border border-slate-200 dark:border-red-500/30 shadow-sm shadow-red-500/10 flex items-center justify-center">
                 <Image
-                  src="/logo/csd-logo.png"
+                  src="/logo/csd-logo.svg"
                   alt="CSD Enterprises Logo"
                   width={36}
                   height={36}
@@ -145,7 +148,7 @@ export default function AdminSidebar({
               </div>
               <div className="flex flex-col">
                 <span className="text-sm font-bold text-navy-950 dark:text-white flex items-center gap-1">
-                  CSD <span className="text-cyan-500">Admin</span>
+                  CSD <span className="text-red-600 dark:text-red-500">Admin</span>
                 </span>
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">
                   CMS Control Center
