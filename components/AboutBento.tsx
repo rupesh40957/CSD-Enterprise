@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { AboutContent } from "@/models";
 import { Sparkles, CheckCircle2 } from "lucide-react";
+import ScrollReveal from "./ScrollReveal";
 
 interface AboutBentoProps {
   about?: AboutContent | null;
@@ -146,28 +147,34 @@ export default function AboutBento({ about }: AboutBentoProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Centered Section Header */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 mb-3.5 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-red-600 dark:text-red-500" />
-            <span>{badgeText}</span>
+        <ScrollReveal>
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 mb-3.5 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-red-600 dark:text-red-500" />
+              <span>{badgeText}</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-navy-950 dark:text-white tracking-tight">
+              {headingText}
+            </h2>
+
+            <div className="w-16 h-1 bg-gradient-to-r from-red-600 to-rose-500 rounded-full mt-4 mb-2" />
           </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-navy-950 dark:text-white tracking-tight">
-            {headingText}
-          </h2>
-
-          <div className="w-16 h-1 bg-gradient-to-r from-red-600 to-rose-500 rounded-full mt-4 mb-2" />
-        </div>
+        </ScrollReveal>
 
         {/* 3-Column Image + Description Layout (Exact Reference Style) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-14">
-          {cards.map((card) => (
-            <div
+          {cards.map((card, cardIdx) => (
+            <ScrollReveal
               key={card.id}
-              className="flex flex-col items-center text-center group transition-all duration-300 p-5 rounded-3xl hover:bg-slate-50/80 dark:hover:bg-navy-900/40 card-hover"
+              direction={cardIdx % 3 === 0 ? "left" : cardIdx % 3 === 2 ? "right" : "up"}
+              delay={(cardIdx % 3 + 1) as 1 | 2 | 3}
             >
-              {/* Circular Image Container */}
-              <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-slate-200/90 dark:border-navy-700/80 shadow-md group-hover:border-red-500/60 group-hover:shadow-xl group-hover:shadow-red-500/20 group-hover:scale-105 transition-all duration-300 mb-6 bg-slate-100 dark:bg-navy-900">
+              <div
+                className="flex flex-col items-center text-center group transition-all duration-300 p-5 rounded-3xl hover:bg-slate-50/80 dark:hover:bg-navy-900/40 card-hover"
+              >
+                {/* Circular Image Container */}
+                <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-slate-200/90 dark:border-navy-700/80 shadow-md group-hover:border-red-500/60 group-hover:shadow-xl group-hover:shadow-red-500/20 group-hover:scale-105 transition-all duration-300 mb-6 bg-slate-100 dark:bg-navy-900 glow-ring">
                 <Image
                   src={card.image}
                   alt={card.title}
@@ -200,7 +207,8 @@ export default function AboutBento({ about }: AboutBentoProps) {
                   ))}
                 </div>
               )}
-            </div>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

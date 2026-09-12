@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import { Inquiry } from "@/models/Inquiry";
 import { Subscriber } from "@/models/Subscriber";
-import { Project } from "@/models/Project";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 

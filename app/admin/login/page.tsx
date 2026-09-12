@@ -12,47 +12,19 @@ import {
   EyeOff,
   ArrowLeft,
   AlertCircle,
-  KeyRound,
-  Check,
-  Copy,
-  Sparkles,
-  UserCheck,
-  ShieldAlert,
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
-const ADMIN_ACCOUNTS = [
-  {
-    id: "admin",
-    label: "Master Admin",
-    email: "admin@csdenterprises.in",
-    password: "CSD#Admin94!mK8x",
-    role: "superadmin",
-  },
-  {
-    id: "support",
-    label: "Support Operations",
-    email: "support@csdenterprises.in",
-    password: "CSD#Supp28*vR7q",
-    role: "admin",
-  },
-];
-
 function AdminLoginForm() {
-  const [selectedAdminId, setSelectedAdminId] = useState<string>("admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [copiedKey, setCopiedKey] = useState<string | null>(null);
-  const [justAutoFilled, setJustAutoFilled] = useState(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/admin";
-
-  const currentAdmin = ADMIN_ACCOUNTS.find((a) => a.id === selectedAdminId) || ADMIN_ACCOUNTS[0];
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,7 +41,7 @@ function AdminLoginForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Authentication failed.");
+        setError(data.error || "Authentication failed. Invalid email or passcode.");
         setLoading(false);
         return;
       }
@@ -82,29 +54,15 @@ function AdminLoginForm() {
     }
   };
 
-  const handleAutoFill = (acc: typeof ADMIN_ACCOUNTS[0]) => {
-    setEmail(acc.email);
-    setPassword(acc.password);
-    setShowPassword(true);
-    setJustAutoFilled(true);
-    setTimeout(() => setJustAutoFilled(false), 3000);
-  };
-
-  const copyToClipboard = (text: string, key: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedKey(key);
-    setTimeout(() => setCopiedKey(null), 2000);
-  };
-
   return (
-    <div className="w-full max-w-lg z-10 animate-fade-in-up">
+    <div className="w-full max-w-md z-10 animate-fade-in-up">
       {/* Security Card */}
       <div className="glass-panel rounded-3xl p-6 sm:p-10 shadow-2xl border border-slate-200/90 dark:border-red-500/25 relative overflow-hidden">
         {/* Top Gradient Stripe */}
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 via-rose-500 to-amber-500" />
 
         {/* Top Logo & Title */}
-        <div className="flex flex-col items-center text-center mb-6">
+        <div className="flex flex-col items-center text-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-white p-2 border border-red-500/30 shadow-md shadow-red-500/10 flex items-center justify-center mb-3">
             <Image
               src="/logo/csd-logo.svg"
@@ -123,103 +81,6 @@ function AdminLoginForm() {
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">
             Authorized Engineering &amp; Operations Portal
           </p>
-        </div>
-
-        {/* Dual Admin Selection & Credentials Helper */}
-        <div className="mb-6 p-4 rounded-2xl bg-slate-50/90 dark:bg-navy-900/90 border border-red-500/20 text-xs shadow-inner">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-navy-800">
-            <div className="font-bold text-red-600 dark:text-red-400 flex items-center gap-1.5">
-              <KeyRound className="w-4 h-4 text-red-500" />
-              <span>Available Admin Accounts</span>
-            </div>
-            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20">
-              2 Accounts Configured
-            </span>
-          </div>
-
-          {/* Account Selector Tabs */}
-          <div className="grid grid-cols-2 gap-1.5 my-3 p-1 bg-white dark:bg-navy-950 rounded-xl border border-slate-200 dark:border-navy-800">
-            {ADMIN_ACCOUNTS.map((acc) => (
-              <button
-                key={acc.id}
-                type="button"
-                onClick={() => {
-                  setSelectedAdminId(acc.id);
-                  handleAutoFill(acc);
-                }}
-                className={`py-2 px-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 btn-press ${
-                  selectedAdminId === acc.id
-                    ? "bg-red-600 text-white shadow-sm shadow-red-600/30"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-navy-900"
-                }`}
-              >
-                <UserCheck className="w-3.5 h-3.5" />
-                <span className="truncate">{acc.label}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Active Admin Details */}
-          <div className="space-y-2 font-mono text-[11px]">
-            <div className="flex items-center justify-between bg-white dark:bg-navy-950/80 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-800 shadow-sm">
-              <span className="text-slate-500 dark:text-slate-400 font-sans text-xs">Email:</span>
-              <div className="flex items-center gap-2">
-                <code className="text-red-600 dark:text-red-400 font-bold">{currentAdmin.email}</code>
-                <button
-                  type="button"
-                  onClick={() => copyToClipboard(currentAdmin.email, "email")}
-                  className="p-1 hover:text-red-500 text-slate-400 transition-colors"
-                  title="Copy email"
-                >
-                  {copiedKey === "email" ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between bg-white dark:bg-navy-950/80 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-navy-800 shadow-sm">
-              <span className="text-slate-500 dark:text-slate-400 font-sans text-xs">Generated Password:</span>
-              <div className="flex items-center gap-2">
-                <code className="text-red-600 dark:text-red-400 font-bold">{currentAdmin.password}</code>
-                <button
-                  type="button"
-                  onClick={() => copyToClipboard(currentAdmin.password, "password")}
-                  className="p-1 hover:text-red-500 text-slate-400 transition-colors"
-                  title="Copy password"
-                >
-                  {copiedKey === "password" ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* 1-Click Auto Fill Action */}
-          <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-navy-800 flex items-center justify-between gap-2">
-            <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400">
-              <ShieldAlert className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-              <span>Login ke bad password change window aayega</span>
-            </div>
-            <button
-              type="button"
-              onClick={() => handleAutoFill(currentAdmin)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-xl shrink-0 transition-all flex items-center gap-1.5 shadow-sm btn-press ${
-                justAutoFilled
-                  ? "bg-emerald-500 text-white scale-105"
-                  : "bg-red-600 hover:bg-red-500 text-white active:scale-95 shadow-red-600/25"
-              }`}
-            >
-              {justAutoFilled ? (
-                <>
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Auto-filled!</span>
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Auto-fill {currentAdmin.label}</span>
-                </>
-              )}
-            </button>
-          </div>
         </div>
 
         {error && (
@@ -246,7 +107,7 @@ function AdminLoginForm() {
                 required
                 autoFocus
                 autoComplete="username"
-                placeholder="admin@csdenterprises.in"
+                placeholder="example@company.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-white dark:bg-navy-900 border border-slate-300 dark:border-navy-700 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none dark:text-white transition-all"
@@ -300,14 +161,6 @@ function AdminLoginForm() {
             )}
           </button>
         </form>
-
-        <div className="mt-8 pt-6 border-t border-slate-200 dark:border-navy-800/80 text-center">
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
-            Signed HTTP-Only JWT Session with Database Verification.
-            <br />
-            Includes mandatory password change workflow for temporary keys.
-          </p>
-        </div>
       </div>
     </div>
   );

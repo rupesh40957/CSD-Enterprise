@@ -1,4 +1,5 @@
 import { getDatabase } from "@/lib/mongodb";
+import { serializeDoc, serializeDocs } from "@/lib/db-helpers";
 import Navbar from "@/components/Navbar";
 import DynamicSectionRenderer, { DynamicHomeData } from "@/components/DynamicSectionRenderer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -65,31 +66,26 @@ async function getHomeData(): Promise<{
       db.collection<CtaContent>("ctaContent").findOne({}),
     ]);
 
-    // Serialize ObjectIds for Client Components
-    function serialize<T>(item: T): T {
-      return JSON.parse(JSON.stringify(item));
-    }
-
     const homeData: DynamicHomeData = {
-      settings: settings ? serialize(settings) : null,
-      sections: serialize(sections),
-      heroSlides: serialize(heroSlides),
-      statistics: serialize(statistics),
-      aboutContent: aboutContent ? serialize(aboutContent) : null,
-      services: serialize(services),
-      industries: serialize(industries),
-      projects: serialize(projects),
-      clients: serialize(clients),
-      certifications: serialize(certifications),
-      testimonials: serialize(testimonials),
-      blogPosts: serialize(blogPosts),
-      faqs: serialize(faqs),
-      ctaContent: ctaContent ? serialize(ctaContent) : null,
+      settings: serializeDoc(settings),
+      sections: serializeDocs(sections),
+      heroSlides: serializeDocs(heroSlides),
+      statistics: serializeDocs(statistics),
+      aboutContent: serializeDoc(aboutContent),
+      services: serializeDocs(services),
+      industries: serializeDocs(industries),
+      projects: serializeDocs(projects),
+      clients: serializeDocs(clients),
+      certifications: serializeDocs(certifications),
+      testimonials: serializeDocs(testimonials),
+      blogPosts: serializeDocs(blogPosts),
+      faqs: serializeDocs(faqs),
+      ctaContent: serializeDoc(ctaContent),
     };
 
     return {
-      settings: settings ? serialize(settings) : null,
-      navigation: serialize(navigation),
+      settings: serializeDoc(settings),
+      navigation: serializeDocs(navigation),
       homeData,
     };
   } catch (error) {

@@ -40,7 +40,10 @@ export const metadata: Metadata = {
   creator: "CSD Enterprises",
   publisher: "CSD Enterprises",
   icons: {
-    icon: "/logo/csd-favicon.png",
+    icon: [
+      { url: "/logo/csd-logo.svg", type: "image/svg+xml" },
+      { url: "/logo/csd-favicon.png" },
+    ],
     apple: "/logo/csd-favicon.png",
   },
   openGraph: {

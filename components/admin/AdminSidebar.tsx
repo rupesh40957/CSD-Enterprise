@@ -137,7 +137,7 @@ export default function AdminSidebar({
           {/* Top Logo & Title */}
           <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-navy-800">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white dark:bg-navy-900 p-1 border border-slate-200 dark:border-red-500/30 shadow-sm shadow-red-500/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-white p-1 border border-slate-200 shadow-sm flex items-center justify-center shrink-0">
                 <Image
                   src="/logo/csd-logo.svg"
                   alt="CSD Enterprises Logo"
