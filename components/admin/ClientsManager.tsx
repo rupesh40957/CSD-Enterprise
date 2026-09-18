@@ -140,12 +140,20 @@ export default function ClientsManager() {
             key={client._id ? String(client._id) : client.name}
             className="p-5 rounded-2xl bg-white dark:bg-navy-900 border border-slate-200 dark:border-navy-800 shadow-sm flex items-center justify-between gap-4"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-navy-800 p-1 flex items-center justify-center text-cyan-500 shrink-0">
-                <Building className="w-5 h-5" />
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="w-12 h-12 rounded-xl bg-white dark:bg-navy-950 p-1.5 border border-slate-200 dark:border-navy-700 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+                {client.logo ? (
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <Building className="w-5 h-5 text-cyan-500" />
+                )}
               </div>
-              <div>
-                <h4 className="font-bold text-sm text-navy-950 dark:text-white line-clamp-1">
+              <div className="min-w-0">
+                <h4 className="font-bold text-sm text-navy-950 dark:text-white truncate">
                   {client.name}
                 </h4>
                 <div className="text-[11px] text-slate-400 mt-0.5">

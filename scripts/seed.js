@@ -11,11 +11,11 @@ if (!uri) {
 
 const WEBSITE_SETTINGS = {
   companyName: "CSD Enterprises",
-  tagline: "Unit of CSD Automation & Technologies",
+  tagline: "Vision of Connectivity",
   logo: "/logo/csd-logo.png",
   favicon: "/logo/csd-favicon.png",
-  phone: "+91 8355976842",
-  altPhone: "9022248869",
+  phone: "+91 7678561876",
+  altPhone: "+91 8355976842 / 9022248869",
   email: "support@csdenterprises.in",
   address: "OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai, Maharashtra - 401203",
   workingHours: "Mon – Sat: 9:00 AM – 7:00 PM (24/7 On-Call Support)",
@@ -24,9 +24,9 @@ const WEBSITE_SETTINGS = {
   twitter: "https://www.x.com/@Shambhu86728236",
   linkedin: "https://www.linkedin.com/company/csd-enterprises",
   youtube: "",
-  whatsapp: "918355976842",
-  defaultSeoTitle: "CSD Enterprises | Industrial Automation, IT Infrastructure & System Integration",
-  defaultSeoDescription: "Delivering mission-critical PLC/SCADA, CCTV Surveillance, Hydrometrology AWS, IT Networks, and Offshore Satcom solutions across India since 2019.",
+  whatsapp: "917678561876",
+  defaultSeoTitle: "CSD Enterprises | Vision of Connectivity | Industrial Automation, Telemetry & AMC",
+  defaultSeoDescription: "System integrator formed in 2019 delivering SCADA, Hydrometrology AWS, V-SAT satcom, CCTV surveillance, and Comprehensive AMC across India.",
   defaultSeoImage: "/logo/csd-logo.png",
   copyrightText: "Copyright © 2019–2026 CSD Enterprises. All Rights Reserved.",
   privacyPolicyUrl: "/privacy",
@@ -116,13 +116,13 @@ const STATISTICS = [
 ];
 
 const ABOUT_CONTENT = {
-  badge: "Company Background & Ethos",
-  heading: "Engineering Precision Built for India's Critical Infrastructure",
+  badge: "Company Profile & Ethos",
+  heading: "Vision of Connectivity — Established 2019",
   description:
-    "Formed in 2019, CSD Enterprises serves as an elite industrial system integrator and turnkey engineering partner across offshore deepwater facilities and onshore industrial plants nationwide.",
-  visionTitle: "Our Vision & Strategic Approach",
+    "We CSD Enterprises are a premier system integrator formed in 2019, dedicated to delivering exceptional products and services to our clients offshore and onshore with a team of qualified and innovative professionals.",
+  visionTitle: "Primary Objectives & Vision",
   visionDescription:
-    "We take a personalized, hands-on engineering approach to every client requirement—working closely with plant engineers, operations chiefs, and defense coordinators to deploy tailored automation, surveillance, and telemetry systems.",
+    "To provide connectivity with various media, essential SCADA Data, and Hydrometrology data to reputed firms, organizations, and institutions; provide advanced telecom solutions in the efficient application of Information Technology; and deliver turnkey supply, design, installation, and Comprehensive & Non-Comprehensive AMC services.",
   experienceBadge: "Established 2019",
   statsOffshore: "Offshore",
   statsOffshoreSub: "Deepwater Satcom & SCADA",
@@ -130,36 +130,76 @@ const ABOUT_CONTENT = {
   statsOnshoreSub: "Power, Oil, Gas & Police",
   coreValues: [
     {
-      icon: "ShieldCheck",
-      title: "Integrity",
+      icon: "Award",
+      title: "Commitment to Excellence",
       description:
-        "Transparent engineering practices, uncompromised industrial safety compliance, and ethical client engagements across hazardous and defense facilities.",
-      highlight: "Safety & Compliance First",
-      color: "from-blue-500/20 to-cyan-500/20 text-cyan-400",
+        "Upholding rigorous engineering standards, certified installations, and zero-defect execution in high-stakes environments.",
+      highlight: "Excellence First",
+      color: "from-red-500/20 to-rose-500/20 text-red-500",
     },
     {
-      icon: "Star",
-      title: "Excellence",
+      icon: "Target",
+      title: "Customer-Centric Approach",
       description:
-        "Rigorous adherence to global PLC/DCS, SCADA, and telecom engineering standards, ensuring fault-tolerant performance in high-stakes environments.",
-      highlight: "Industrial-Grade Reliability",
-      color: "from-amber-500/20 to-orange-500/20 text-amber-400",
+        "Designing tailored automation, satcom, and telemetry architectures that adapt specifically to client workflows.",
+      highlight: "Tailored Architecture",
+      color: "from-blue-500/20 to-cyan-500/20 text-blue-500",
+    },
+    {
+      icon: "HeartHandshake",
+      title: "Customer Satisfaction",
+      description:
+        "Exceeding expectations through continuous improvement, rapid on-site resolution, and long-term client relationships.",
+      highlight: "SLA Satisfaction",
+      color: "from-emerald-500/20 to-teal-500/20 text-emerald-500",
     },
     {
       icon: "Users",
-      title: "Collaboration",
+      title: "Teamwork",
       description:
-        "Long-term engineering partnerships with India's largest PSUs, EPC contractors, telecom pioneers, and state law enforcement agencies.",
-      highlight: "Trusted Partner Ecosystem",
-      color: "from-emerald-500/20 to-teal-500/20 text-emerald-400",
+        "Collaborative synergy between senior technical architects, offshore specialists, and on-ground field technicians.",
+      highlight: "Unified Engineering",
+      color: "from-purple-500/20 to-indigo-500/20 text-purple-500",
     },
     {
-      icon: "Cpu",
-      title: "Innovation",
+      icon: "Shield",
+      title: "Professionalism",
       description:
-        "Pioneering IoT telemetry, solar-powered hydrometrology Automatic Weather Stations, and satellite earth stations for remote automated intelligence.",
-      highlight: "Next-Gen Telemetry & IoT",
-      color: "from-purple-500/20 to-cyan-500/20 text-purple-400",
+        "Strict industrial safety compliance, transparent reporting, and adherence to PESO, OISD, and ISO guidelines.",
+      highlight: "Certified Standards",
+      color: "from-amber-500/20 to-orange-500/20 text-amber-500",
+    },
+    {
+      icon: "RefreshCw",
+      title: "Flexibility & Adaptability",
+      description:
+        "Agile engineering execution across challenging terrains, offshore platforms, and multi-state distributed locations.",
+      highlight: "Agile Field Response",
+      color: "from-cyan-500/20 to-sky-500/20 text-cyan-500",
+    },
+    {
+      icon: "Scale",
+      title: "Accountability",
+      description:
+        "Complete turnkey responsibility from initial site survey and design through to commissioning and AMC lifecycles.",
+      highlight: "Full Lifecycle Ownership",
+      color: "from-rose-500/20 to-pink-500/20 text-rose-500",
+    },
+    {
+      icon: "Compass",
+      title: "Social Responsibility",
+      description:
+        "Empowering national critical infrastructure, public safety networks, and transparent governance systems.",
+      highlight: "Nation Building",
+      color: "from-indigo-500/20 to-blue-500/20 text-indigo-500",
+    },
+    {
+      icon: "Leaf",
+      title: "Environment Responsibility",
+      description:
+        "Deploying solar-powered Automatic Weather Stations, energy-efficient telemetry, and sustainable green installations.",
+      highlight: "Green Telemetry",
+      color: "from-green-500/20 to-emerald-500/20 text-green-500",
     },
   ],
   updatedAt: new Date(),
@@ -484,12 +524,19 @@ const PROJECTS = [
 ];
 
 const CLIENTS = [
-  { name: "Indian Oil Corporation Limited (IOCL)", logo: "/logo/csd-logo.png", website: "https://iocl.com", sortOrder: 0, isActive: true, featured: true },
-  { name: "Reliance JIO Infocomm", logo: "/logo/csd-logo.png", website: "https://jio.com", sortOrder: 1, isActive: true, featured: true },
-  { name: "Larsen & Toubro (L&T)", logo: "/logo/csd-logo.png", website: "https://larsentoubro.com", sortOrder: 2, isActive: true, featured: true },
-  { name: "Central Water Commission (CWC Delhi)", logo: "/logo/csd-logo.png", website: "https://cwc.gov.in", sortOrder: 3, isActive: true, featured: true },
-  { name: "Chhattisgarh State Police Department", logo: "/logo/csd-logo.png", website: "https://cgpolice.gov.in", sortOrder: 4, isActive: true, featured: true },
-  { name: "Bharat Petroleum Corporation Ltd (BPCL)", logo: "/logo/csd-logo.png", website: "https://bharatpetroleum.in", sortOrder: 5, isActive: true, featured: true },
+  { name: "Central Water Commission (CWC)", logo: "/images/clients/cwc.png", website: "https://cwc.gov.in", sortOrder: 0, isActive: true, featured: true },
+  { name: "Oil and Natural Gas Corporation Limited (ONGC)", logo: "/images/clients/ongc.svg", website: "https://ongcindia.com", sortOrder: 1, isActive: true, featured: true },
+  { name: "Indian Oil Corporation Limited (IOCL)", logo: "/images/clients/iocl.svg", website: "https://iocl.com", sortOrder: 2, isActive: true, featured: true },
+  { name: "CONCOR Air Limited", logo: "/images/clients/concor.svg", website: "https://concorindia.co.in", sortOrder: 3, isActive: true, featured: true },
+  { name: "Food Corporation of India (FCI)", logo: "/images/clients/fci.svg", website: "https://fci.gov.in", sortOrder: 4, isActive: true, featured: true },
+  { name: "Indian Institute of Management, Indore (IIM Indore)", logo: "/images/clients/iim-indore.svg", website: "https://iimidr.ac.in", sortOrder: 5, isActive: true, featured: true },
+  { name: "Hindustan Petroleum Corporation Limited (HPCL)", logo: "/images/clients/hpcl.svg", website: "https://hindustanpetroleum.com", sortOrder: 6, isActive: true, featured: true },
+  { name: "Life Insurance Corporation of India (LIC)", logo: "/images/clients/lic.svg", website: "https://licindia.in", sortOrder: 7, isActive: true, featured: true },
+  { name: "L&T Electrical & Automation", logo: "/images/clients/lnt.svg", website: "https://larsentoubro.com", sortOrder: 8, isActive: true, featured: true },
+  { name: "Indian Railways", logo: "/images/clients/indian-railways.svg", website: "https://indianrailways.gov.in", sortOrder: 9, isActive: true, featured: true },
+  { name: "National Fertilizer Limited (NFL)", logo: "/images/clients/nfl.svg", website: "https://nationalfertilizers.com", sortOrder: 10, isActive: true, featured: true },
+  { name: "Adani Group", logo: "/images/clients/adani.svg", website: "https://adani.com", sortOrder: 11, isActive: true, featured: true },
+  { name: "Bharat Sanchar Nigam Limited (BSNL)", logo: "/images/clients/bsnl.png", website: "https://bsnl.co.in", sortOrder: 12, isActive: true, featured: true },
 ];
 
 const CERTIFICATIONS = [

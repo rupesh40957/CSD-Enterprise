@@ -1,141 +1,105 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import {
+  Sparkles,
+  CheckCircle2,
+  Target,
+  Users,
+  Award,
+  Shield,
+  HeartHandshake,
+  Lightbulb,
+  Leaf,
+  Scale,
+  RefreshCw,
+  Clock,
+  Radio,
+  Workflow,
+  Compass,
+} from "lucide-react";
 import { AboutContent } from "@/models";
-import { Sparkles, CheckCircle2 } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 interface AboutBentoProps {
   about?: AboutContent | null;
 }
 
-interface AboutSectionCard {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  list?: string[];
-}
-
-const DEFAULT_CARDS: AboutSectionCard[] = [
+// 9 Official Core Values directly from Company Profile Page 4
+const OFFICIAL_CORE_VALUES = [
   {
-    id: "establishment",
-    title: "Establishment",
-    description:
-      "We are system integrator was formed in 2019 and dedicated to delivering exceptional products and services to our clients offshore and onshore.",
-    image: "/images/about/establishment.jpg",
+    title: "Commitment to Excellence",
+    icon: Award,
+    description: "Upholding rigorous engineering standards, certified installations, and zero-defect execution in high-stakes environments.",
+    color: "from-red-500/20 to-rose-500/10 text-red-600 dark:text-red-400 border-red-500/30",
   },
   {
-    id: "vision",
-    title: "Our Vision",
-    description:
-      "Our vision is to provide top-notch services & we strive to provide outstanding solutions that exceed client expectations and foster long-term relationships.",
-    image: "/images/about/vision.jpg",
+    title: "Customer-Centric Approach",
+    icon: Target,
+    description: "Designing tailored automation, satcom, and telemetry architectures that adapt specifically to client workflows.",
+    color: "from-blue-500/20 to-cyan-500/10 text-blue-600 dark:text-cyan-400 border-blue-500/30",
   },
   {
-    id: "approach",
-    title: "Our Approach",
-    description:
-      "We take a personalized approach to each client's needs, working closely with them to understand their unique challenges and develop customized solutions.",
-    image: "/images/about/approach.svg",
+    title: "Customer Satisfaction",
+    icon: HeartHandshake,
+    description: "Exceeding expectations through continuous improvement, rapid on-site resolution, and long-term client relationships.",
+    color: "from-emerald-500/20 to-teal-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
   },
   {
-    id: "expertise",
-    title: "Our Expertise",
-    description:
-      "We have experienced and expert professionals in PLC, SCADA, CCTV Surveillance System, IT & Networking Infrastructure, Hydrometeorology & Satcom for offshore & onshore locations.",
-    image: "/images/about/expertise.svg",
+    title: "Teamwork",
+    icon: Users,
+    description: "Collaborative synergy between senior technical architects, offshore specialists, and on-ground field technicians.",
+    color: "from-purple-500/20 to-indigo-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30",
   },
   {
-    id: "management",
-    title: "Management & Employees",
-    description:
-      "Our management provides strategic direction, while our employees are dedicated to executing our vision with precision and care. Together, we work collaboratively to drive innovation, quality, and customer satisfaction.",
-    image: "/images/about/management.svg",
+    title: "Professionalism",
+    icon: Shield,
+    description: "Strict industrial safety compliance, transparent reporting, and adherence to PESO, OISD, and ISO guidelines.",
+    color: "from-amber-500/20 to-orange-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30",
   },
   {
-    id: "core-values",
-    title: "Our Core Values",
-    description:
-      "Upholding the highest ethical standards, operational safety, and engineering excellence across every mission-critical deployment.",
-    image: "/images/about/core-values.svg",
-    list: ["Integrity", "Excellence", "Collaboration", "Innovation"],
+    title: "Flexibility & Adaptability",
+    icon: RefreshCw,
+    description: "Agile engineering execution across challenging terrains, offshore platforms, and multi-state distributed locations.",
+    color: "from-cyan-500/20 to-sky-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/30",
+  },
+  {
+    title: "Accountability",
+    icon: Scale,
+    description: "Complete turnkey responsibility from initial site survey and design through to commissioning and AMC lifecycles.",
+    color: "from-rose-500/20 to-pink-500/10 text-rose-600 dark:text-rose-400 border-rose-500/30",
+  },
+  {
+    title: "Social Responsibility",
+    icon: Compass,
+    description: "Empowering national critical infrastructure, public safety networks, and transparent governance systems.",
+    color: "from-indigo-500/20 to-blue-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/30",
+  },
+  {
+    title: "Environment Responsibility",
+    icon: Leaf,
+    description: "Deploying solar-powered Automatic Weather Stations, energy-efficient telemetry, and sustainable green installations.",
+    color: "from-green-500/20 to-emerald-500/10 text-green-600 dark:text-emerald-400 border-green-500/30",
   },
 ];
 
+const ICON_MAP: Record<string, React.ElementType> = {
+  Award,
+  Target,
+  HeartHandshake,
+  Users,
+  Shield,
+  RefreshCw,
+  Scale,
+  Compass,
+  Leaf,
+  Lightbulb,
+  CheckCircle2,
+};
+
 export default function AboutBento({ about }: AboutBentoProps) {
-  // If about data is customized in DB, map it or fallback to the reference image structure
-  const cards: AboutSectionCard[] = React.useMemo(() => {
-    if (about?.cards && about.cards.length > 0) {
-      return about.cards.map((c, idx) => ({
-        id: c.id || `card-${idx}`,
-        title: c.title,
-        description: c.description || "",
-        image: c.image || DEFAULT_CARDS[idx]?.image || "/images/about/establishment.jpg",
-        list:
-          c.list && c.list.length > 0
-            ? c.list
-            : c.id === "core-values" || idx === 5
-            ? about.coreValues && about.coreValues.length > 0
-              ? about.coreValues.map((v) => v.title)
-              : ["Integrity", "Excellence", "Collaboration", "Innovation"]
-            : undefined,
-      }));
-    }
-
-    return [
-      {
-        id: "establishment",
-        title: "Establishment",
-        description: about?.description || DEFAULT_CARDS[0].description,
-        image: about?.establishmentImage || "/images/about/establishment.jpg",
-      },
-      {
-        id: "vision",
-        title: about?.visionTitle || "Our Vision",
-        description: about?.visionDescription || DEFAULT_CARDS[1].description,
-        image: about?.visionImage || "/images/about/vision.jpg",
-      },
-      {
-        id: "approach",
-        title: "Our Approach",
-        description:
-          DEFAULT_CARDS[2].description,
-        image: about?.approachImage || "/images/about/approach.svg",
-      },
-      {
-        id: "expertise",
-        title: "Our Expertise",
-        description:
-          about?.statsOffshoreSub && about?.statsOnshoreSub
-            ? `We have experienced and expert professionals in PLC, SCADA, CCTV Surveillance System, IT & Networking Infrastructure, ${about.statsOffshoreSub} & ${about.statsOnshoreSub}.`
-            : DEFAULT_CARDS[3].description,
-        image: about?.expertiseImage || "/images/about/expertise.svg",
-      },
-      {
-        id: "management",
-        title: "Management & Employees",
-        description:
-          DEFAULT_CARDS[4].description,
-        image: about?.managementImage || "/images/about/management.svg",
-      },
-      {
-        id: "core-values",
-        title: "Our Core Values",
-        description:
-          "Upholding the highest ethical standards, operational safety, and engineering excellence across every mission-critical deployment.",
-        image: about?.coreValuesImage || "/images/about/core-values.svg",
-        list:
-          about?.coreValues && about.coreValues.length > 0
-            ? about.coreValues.map((v) => v.title)
-            : ["Integrity", "Excellence", "Collaboration", "Innovation"],
-      },
-    ];
-  }, [about]);
-
-  const badgeText = about?.badge || "Company Background & Ethos";
-  const headingText = about?.heading || "About Us";
+  const [activeTab, setActiveTab] = useState<"overview" | "values" | "team">("overview");
 
   return (
     <section
@@ -143,74 +107,333 @@ export default function AboutBento({ about }: AboutBentoProps) {
       className="py-24 bg-white dark:bg-navy-950 border-b border-slate-200 dark:border-navy-800/80 transition-colors relative overflow-hidden"
     >
       {/* Background Ambient Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-600/5 dark:bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-red-600/5 dark:bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Centered Section Header */}
         <ScrollReveal>
-          <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 mb-3.5 shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-red-600 dark:text-red-500" />
-              <span>{badgeText}</span>
+              <span>{about?.badge || "Company Profile & Background"}</span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-navy-950 dark:text-white tracking-tight">
-              {headingText}
+              {about?.heading || "Vision of Connectivity"}
             </h2>
 
-            <div className="w-16 h-1 bg-gradient-to-r from-red-600 to-rose-500 rounded-full mt-4 mb-2" />
+            <div className="w-16 h-1 bg-gradient-to-r from-red-600 to-rose-500 rounded-full mt-4 mb-3" />
+
+            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
+              {about?.description || (
+                <>
+                  We CSD Enterprises are a premier system integrator formed in <strong>2019</strong>, dedicated to
+                  delivering exceptional products and engineering services offshore and onshore with a team of
+                  qualified and innovative professionals.
+                </>
+              )}
+            </p>
+
+            {/* Navigation Tabs for About Deep-Dive */}
+            <div className="mt-8 flex items-center gap-1.5 bg-slate-100 dark:bg-navy-900 p-1.5 rounded-2xl border border-slate-200 dark:border-navy-800 shadow-sm">
+              <button
+                type="button"
+                onClick={() => setActiveTab("overview")}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all btn-press ${
+                  activeTab === "overview"
+                    ? "bg-red-600 text-white shadow-md shadow-red-600/25"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                Vision, Mission &amp; Objectives
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("values")}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all btn-press ${
+                  activeTab === "values"
+                    ? "bg-red-600 text-white shadow-md shadow-red-600/25"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                Our 9 Core Values
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("team")}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all btn-press ${
+                  activeTab === "team"
+                    ? "bg-red-600 text-white shadow-md shadow-red-600/25"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                Management &amp; Employees
+              </button>
+            </div>
           </div>
         </ScrollReveal>
 
-        {/* 3-Column Image + Description Layout (Exact Reference Style) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-14">
-          {cards.map((card, cardIdx) => (
-            <ScrollReveal
-              key={card.id}
-              direction={cardIdx % 3 === 0 ? "left" : cardIdx % 3 === 2 ? "right" : "up"}
-              delay={(cardIdx % 3 + 1) as 1 | 2 | 3}
-            >
-              <div
-                className="flex flex-col items-center text-center group transition-all duration-300 p-5 rounded-3xl hover:bg-slate-50/80 dark:hover:bg-navy-900/40 card-hover"
-              >
-                {/* Circular Image Container */}
-                <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-slate-200/90 dark:border-navy-700/80 shadow-md group-hover:border-red-500/60 group-hover:shadow-xl group-hover:shadow-red-500/20 group-hover:scale-105 transition-all duration-300 mb-6 bg-slate-100 dark:bg-navy-900 glow-ring">
-                <Image
-                  src={card.image}
-                  alt={card.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes="(max-width: 768px) 160px, 192px"
-                />
-              </div>
-
-              {/* Title */}
-              <h3 className="text-xl sm:text-2xl font-bold text-navy-950 dark:text-white tracking-tight mb-3 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
-                {card.title}
-              </h3>
-
-              {/* Description */}
-              {card.description && !card.list && (
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs sm:max-w-sm">
-                  {card.description}
-                </p>
-              )}
-
-              {/* Clean Vertical Values List for Card 6 (Exact Reference Style) */}
-              {card.list && card.list.length > 0 && (
-                <div className="flex flex-col items-center justify-center space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 font-medium">
-                  {card.list.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-red-500" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
+        {/* TAB 1: OVERVIEW & PRIMARY OBJECTIVES */}
+        {activeTab === "overview" && (
+          <div className="space-y-10">
+            {/* 3 Pillar Cards: Vision, Mission, Objectives */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Card 1: Formation & Vision */}
+              <div className="p-8 rounded-3xl glass-panel border border-slate-200 dark:border-navy-800 bg-white/80 dark:bg-navy-900/60 shadow-md flex flex-col justify-between card-hover">
+                <div>
+                  <div className="w-12 h-12 rounded-2xl bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center mb-5 border border-red-500/20">
+                    <Radio className="w-6 h-6" />
+                  </div>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
+                    ESTABLISHED 2019
+                  </span>
+                  <h3 className="text-xl font-black text-navy-950 dark:text-white mt-1 mb-3">
+                    System Integration &amp; Vision
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    Formed in 2019 to provide seamless connectivity with various media, essential SCADA data, and
+                    hydrometrology telemetry to reputed firms, institutions, and government bodies nationwide.
+                  </p>
                 </div>
-              )}
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-navy-800 text-[11px] text-slate-500 font-semibold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                  <span>Offshore &amp; Onshore Deployments</span>
+                </div>
               </div>
-            </ScrollReveal>
-          ))}
-        </div>
+
+              {/* Card 2: Our Mission */}
+              <div className="p-8 rounded-3xl glass-panel border border-slate-200 dark:border-navy-800 bg-white/80 dark:bg-navy-900/60 shadow-md flex flex-col justify-between card-hover">
+                <div>
+                  <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-cyan-400 flex items-center justify-center mb-5 border border-blue-500/20">
+                    <Target className="w-6 h-6" />
+                  </div>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-blue-600 dark:text-cyan-400">
+                    OUR MISSION
+                  </span>
+                  <h3 className="text-xl font-black text-navy-950 dark:text-white mt-1 mb-3">
+                    Exceeding Client Expectations
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    We strive to provide outstanding solutions that exceed client expectations and foster
+                    long-term relationships, delivering telecom and IT applications that optimize industrial efficiency.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-navy-800 text-[11px] text-slate-500 font-semibold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                  <span>Long-term Trust &amp; SLA Commitment</span>
+                </div>
+              </div>
+
+              {/* Card 3: Key Turnkey Activities & AMC */}
+              <div className="p-8 rounded-3xl glass-panel border border-slate-200 dark:border-navy-800 bg-white/80 dark:bg-navy-900/60 shadow-md flex flex-col justify-between card-hover">
+                <div>
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 border border-emerald-500/20">
+                    <Workflow className="w-6 h-6" />
+                  </div>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                    FULL LIFECYCLE SCOPE
+                  </span>
+                  <h3 className="text-xl font-black text-navy-950 dark:text-white mt-1 mb-3">
+                    Supply, Design &amp; AMC Services
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    Key activities comprise the supply, design, installation, and both <strong>Non-Comprehensive</strong> and{" "}
+                    <strong>Comprehensive AMC services</strong> for all telecommunication, hydrometrology, and CCTV equipment.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-navy-800 text-[11px] text-slate-500 font-semibold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                  <span>24*7 Preventive &amp; Breakdown AMC</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Primary Objectives Box (Exact from PDF Page 2 & 3) */}
+            <div className="p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-navy-950 to-slate-900 text-white shadow-xl border border-slate-800 relative overflow-hidden">
+              <div className="absolute right-0 top-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="relative z-10 max-w-4xl">
+                <span className="text-xs font-mono font-bold text-red-400 uppercase tracking-widest block mb-2">
+                  OFFICIAL CHARTER
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black text-white mb-6">
+                  Our Primary Objectives &amp; Vision
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-7 h-7 rounded-xl bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-400 shrink-0 mt-0.5 font-bold text-xs">
+                      1
+                    </div>
+                    <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
+                      <strong>Essential SCADA &amp; Hydrometrology Connectivity:</strong> To provide connectivity with
+                      various media, essential SCADA data, and hydrometrology data to reputed firms, organizations,
+                      and institutions via their required media of communication.
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-7 h-7 rounded-xl bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-400 shrink-0 mt-0.5 font-bold text-xs">
+                      2
+                    </div>
+                    <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
+                      <strong>Advanced Telecom Solutions:</strong> Provide telecom solutions to organizations and
+                      companies in the efficient application of Information Technology (IT).
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-7 h-7 rounded-xl bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-400 shrink-0 mt-0.5 font-bold text-xs">
+                      3
+                    </div>
+                    <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
+                      <strong>Turnkey Supply, Installation &amp; AMC:</strong> Key activities comprise the turnkey
+                      supply, design, installation, and Non-Comprehensive and Comprehensive AMC services for all types of
+                      Telecommunication, Hydrometrology, and CCTV equipment.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 2: OUR 9 CORE VALUES (Exact from PDF Page 4) */}
+        {activeTab === "values" && (
+          <div>
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <h3 className="text-2xl sm:text-3xl font-black text-navy-950 dark:text-white">
+                Guiding Principles for Our Operations
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2">
+                At CSD Enterprises, we uphold the following 9 values as guiding principles for our operations
+                and business transactions nationwide.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {((about?.coreValues && about.coreValues.length > 0)
+                ? about.coreValues
+                : OFFICIAL_CORE_VALUES
+              ).map((val, idx) => {
+                const Icon =
+                  typeof val.icon === "string"
+                    ? ICON_MAP[val.icon] || Award
+                    : (val.icon as React.ElementType) || Award;
+                const colorClass = val.color || "from-red-500/20 to-rose-500/10 text-red-600 dark:text-red-400 border-red-500/30";
+                return (
+                  <div
+                    key={val.title}
+                    className="p-6 rounded-2xl glass-panel border border-slate-200 dark:border-navy-800 bg-white/90 dark:bg-navy-900/70 shadow-sm hover:shadow-xl hover:border-red-500/40 transition-all duration-300 card-hover flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${colorClass} border flex items-center justify-center shrink-0`}>
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <span className="text-[10px] font-mono font-bold text-slate-400">
+                          0{idx + 1}
+                        </span>
+                      </div>
+                      <h4 className="text-base font-bold text-navy-950 dark:text-white mb-2">
+                        {val.title}
+                      </h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        {val.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 3: MANAGEMENT & EMPLOYEES (Exact from PDF Page 7) */}
+        {activeTab === "team" && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 space-y-6">
+              <div className="p-8 rounded-3xl glass-panel border border-slate-200 dark:border-navy-800 bg-white/80 dark:bg-navy-900/70 shadow-lg">
+                <span className="text-xs font-mono font-bold text-red-600 dark:text-red-400 uppercase tracking-wider block mb-2">
+                  PEOPLE &amp; ETHOS
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black text-navy-950 dark:text-white mb-4">
+                  Management Strategic Direction &amp; Employee Precision
+                </h3>
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                  At CSD Enterprises, our team comprises experienced professionals and skilled employees who are
+                  passionate about delivering exceptional service. Our management team provides strategic direction,
+                  while our employees are dedicated to executing our vision with precision and care.
+                </p>
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                  Together, we work collaboratively to drive innovation, quality, and customer satisfaction.
+                  Exceeding client satisfaction motivates us to continuously improve, and deliver exceptional service,
+                  ensuring our clients receive the best possible solutions.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200 dark:border-navy-800">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xs">
+                      ✓
+                    </div>
+                    <span className="text-xs font-bold text-navy-950 dark:text-white">
+                      Experienced Engineering Leadership
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xs">
+                      ✓
+                    </div>
+                    <span className="text-xs font-bold text-navy-950 dark:text-white">
+                      Field Execution with Precision &amp; Care
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xs">
+                      ✓
+                    </div>
+                    <span className="text-xs font-bold text-navy-950 dark:text-white">
+                      Continuous Improvement Culture
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-red-500/10 text-red-600 dark:text-red-400 flex items-center justify-center font-bold text-xs">
+                      ✓
+                    </div>
+                    <span className="text-xs font-bold text-navy-950 dark:text-white">
+                      24*7 Client Support SLA
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 space-y-4">
+              <div className="p-6 rounded-2xl bg-gradient-to-br from-red-600 to-rose-700 text-white shadow-xl">
+                <div className="text-3xl sm:text-4xl font-black mb-1">2019</div>
+                <div className="text-xs font-bold uppercase tracking-wider text-rose-200 mb-3">
+                  Year of Establishment
+                </div>
+                <p className="text-xs leading-relaxed text-rose-100">
+                  Established with a focus on mission-critical system integration for national energy,
+                  water resource, and law enforcement infrastructure.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl glass-panel border border-slate-200 dark:border-navy-800 bg-white/80 dark:bg-navy-900/60 shadow-sm">
+                <h4 className="text-sm font-bold text-navy-950 dark:text-white mb-2 flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-red-500" />
+                  <span>24*7 Dedicated Engineering On-Call</span>
+                </h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
+                  We are available round-the-clock for technical inquiries, emergency field response, and AMC servicing.
+                </p>
+                <div className="flex items-center gap-3 text-xs font-bold text-navy-950 dark:text-white">
+                  <span>Direct Hotline:</span>
+                  <a href="tel:7678561876" className="text-red-600 dark:text-red-400 hover:underline">
+                    +91 7678561876
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

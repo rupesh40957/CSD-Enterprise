@@ -29,12 +29,12 @@ export default function Footer({ settings, services = [], navItems = [] }: Foote
 
   const logoSrc = settings?.logo && settings.logo !== "/logo/csd-logo.png" ? settings.logo : "/logo/csd-logo.svg";
   const companyName = settings?.companyName || "CSD Enterprises";
-  const tagline = settings?.tagline || "Unit of CSD Automation & Technologies";
+  const tagline = settings?.tagline || "Vision of Connectivity";
   const logoClassName =
     theme === "dark"
       ? "object-contain w-full h-full transition-all duration-300 brightness-0 invert"
       : "object-contain w-full h-full transition-all duration-300";
-  const phone = settings?.phone || "+91 8355976842";
+  const phone = settings?.phone || "+91 7678561876";
   const emailAddr = settings?.email || "support@csdenterprises.in";
   const address = settings?.address || "OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai - 401203";
   const copyright = settings?.copyrightText || `Copyright © 2019–${new Date().getFullYear()} CSD Enterprises. All Rights Reserved.`;
@@ -69,13 +69,13 @@ export default function Footer({ settings, services = [], navItems = [] }: Foote
     }
   };
 
-  const activeServices = services.length > 0 ? services.slice(0, 6) : [
-    { title: "Industrial Automation (PLC / SCADA)", slug: "industrial-automation" },
-    { title: "Digitization & Industrial IoT", slug: "digitization-iot" },
-    { title: "Explosion-Proof CCTV Surveillance", slug: "cctv-surveillance" },
-    { title: "Sensorization & Hydrometrology (AWS)", slug: "sensorization-hydrometrology" },
-    { title: "IT Networks & Infrastructure (LAN / OFC)", slug: "it-network-infrastructure" },
-    { title: "Manpower & Facility Engineering", slug: "manpower-facility-services" },
+  const activeServices = [
+    { title: "Satellite & V-SAT Communications", slug: "#services" },
+    { title: "SCADA Data Transfer & Telemetry", slug: "#services" },
+    { title: "CCTV Surveillance & Explosion-Proof", slug: "#services" },
+    { title: "Automatic Weather Stations (AWS/AWLR)", slug: "#services" },
+    { title: "IT Networks, OFC & LAN Switching", slug: "#services" },
+    { title: "Turnkey Comprehensive & Non-Comp AMC", slug: "#services" },
   ];
 
   return (

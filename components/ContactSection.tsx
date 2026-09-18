@@ -13,13 +13,22 @@ import {
 } from "lucide-react";
 
 const SOLUTIONS = [
-  "Industrial Automation (PLC/SCADA/DCS)",
-  "Digitization & Industrial IoT",
-  "CCTV Surveillance & Explosion-Proof Systems",
-  "Sensorization & Hydrometrology (AWS)",
-  "IT Network & Infrastructure (LAN/OFC/UPS)",
-  "Manpower Facility & Engineering Services",
-  "Other / Custom Turnkey Integration",
+  "V-SAT Satellite Communication Services",
+  "SCADA Data Transfer & Remote Telemetry",
+  "CCTV Surveillance & Explosion-Proof Video Systems",
+  "Fire Alarm & Emergency Detection Systems",
+  "Automatic Weather Stations (AWS) Telemetry",
+  "Automatic Water Level Recorders (AWLR) & Flood Telemetry",
+  "Automated Boom Barriers & Access Control Systems",
+  "EPABX/PBX & Long-Range Microwave Links",
+  "P2P / PML High-Throughput Wireless Radios",
+  "IT Network Infrastructure, OFC Backbones & LAN Switching",
+  "Industrial UPS & Uninterruptible Power Systems",
+  "Energy Meter Installation & Real-Time Data Display",
+  "Flow Meter Installation & Precise Flow Telemetry",
+  "Comprehensive Annual Maintenance Contract (AMC)",
+  "Non-Comprehensive Annual Maintenance Contract (AMC)",
+  "Other Custom Turnkey Integration",
 ];
 
 export default function ContactSection() {
@@ -86,48 +95,57 @@ export default function ContactSection() {
           {/* Left Column: Corporate Office Contact Details */}
           <div className="lg:col-span-5 space-y-8">
             <div>
-              <span className="px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 mb-3 inline-block">
-                Direct Engineering Inquiries
+              <span className="px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 mb-3 inline-block">
+                Direct Engineering Inquiries &amp; 24*7 Support
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-navy-950 dark:text-white tracking-tight">
                 Initiate a Technical Consultation
               </h2>
               <p className="mt-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                Connect directly with our senior automation and infrastructure architects.
-                Whether drafting an RFQ for a hazardous process plant or expanding state telecom
-                infrastructure, we provide rigorous engineering proposals.
+                Connect directly with our senior automation, hydrometrology, and satcom architects.
+                Whether drafting an RFQ for a hazardous process plant or expanding statewide telemetry,
+                we provide rigorous proposals and turnkey execution.
               </p>
             </div>
 
             <div className="space-y-4">
-              <div className="p-4 rounded-xl glass-panel flex items-start gap-4 shadow-sm">
-                <div className="w-10 h-10 rounded-lg bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-500 shrink-0">
-                  <MapPin className="w-5 h-5" />
+              {/* Primary 24*7 Hotline */}
+              <div className="p-4 rounded-xl glass-panel flex items-start gap-4 shadow-sm border border-red-500/30 bg-red-500/5">
+                <div className="w-10 h-10 rounded-lg bg-red-500/15 border border-red-500/30 flex items-center justify-center text-red-600 dark:text-red-400 shrink-0">
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                    Corporate Headquarters
-                  </h4>
-                  <p className="text-sm font-semibold text-navy-950 dark:text-white mt-0.5">
-                    OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai, Maharashtra - 401203
+                  <div className="flex items-center gap-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
+                      24*7 Dedicated Operations Helpline
+                    </h4>
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  </div>
+                  <div className="text-base font-extrabold text-navy-950 dark:text-white mt-1">
+                    <a href="tel:7678561876" className="hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                      +91 7678561876
+                    </a>
+                  </div>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    Call or message us anytime on WhatsApp
                   </p>
                 </div>
               </div>
 
               <div className="p-4 rounded-xl glass-panel flex items-start gap-4 shadow-sm">
-                <div className="w-10 h-10 rounded-lg bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-500 shrink-0">
+                <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-navy-800 border border-slate-200 dark:border-navy-700 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                    Direct Phone Support
+                    Corporate Office Lines
                   </h4>
                   <div className="text-sm font-semibold text-navy-950 dark:text-white mt-0.5 space-x-3">
-                    <a href="tel:+918355976842" className="hover:text-cyan-500 transition-colors">
+                    <a href="tel:+918355976842" className="hover:text-red-600 dark:hover:text-red-400 transition-colors">
                       +91 8355976842
                     </a>
                     <span>•</span>
-                    <a href="tel:9022248869" className="hover:text-cyan-500 transition-colors">
+                    <a href="tel:9022248869" className="hover:text-red-600 dark:hover:text-red-400 transition-colors">
                       9022248869
                     </a>
                   </div>
@@ -135,7 +153,7 @@ export default function ContactSection() {
               </div>
 
               <div className="p-4 rounded-xl glass-panel flex items-start gap-4 shadow-sm">
-                <div className="w-10 h-10 rounded-lg bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-500 shrink-0">
+                <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-navy-800 border border-slate-200 dark:border-navy-700 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
@@ -144,21 +162,35 @@ export default function ContactSection() {
                   </h4>
                   <a
                     href="mailto:support@csdenterprises.in"
-                    className="text-sm font-semibold text-navy-950 dark:text-white mt-0.5 hover:text-cyan-500 transition-colors block"
+                    className="text-sm font-semibold text-navy-950 dark:text-white mt-0.5 hover:text-red-600 dark:hover:text-red-400 transition-colors block"
                   >
                     support@csdenterprises.in
                   </a>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl glass-panel flex items-start gap-4 shadow-sm">
+                <div className="w-10 h-10 rounded-lg bg-slate-100 dark:bg-navy-800 border border-slate-200 dark:border-navy-700 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Corporate Headquarters
+                  </h4>
+                  <p className="text-xs sm:text-sm font-semibold text-navy-950 dark:text-white mt-0.5">
+                    OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai, Maharashtra - 401203
+                  </p>
                 </div>
               </div>
             </div>
 
             <div className="p-4 rounded-xl bg-slate-100 dark:bg-navy-900/60 border border-slate-200 dark:border-navy-800 text-xs text-slate-600 dark:text-slate-400 space-y-2">
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-cyan-500" />
-                <span>Response SLA: Within 4 Business Hours for Industrial RFQs</span>
+                <Clock className="w-4 h-4 text-red-500" />
+                <span>Response SLA: Within 4 Business Hours for Industrial RFQs &amp; AMC</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-cyan-500" />
+                <ShieldCheck className="w-4 h-4 text-red-500" />
                 <span>Standard NDA &amp; Industrial Confidentiality Guaranteed</span>
               </div>
             </div>

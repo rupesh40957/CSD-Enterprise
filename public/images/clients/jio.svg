@@ -1,25 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
-  <!-- Reliance Jio Official Circular Logo -->
-  <defs>
-    <linearGradient id="jioGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0066cc" />
-      <stop offset="100%" stop-color="#003399" />
-    </linearGradient>
-  </defs>
-  <circle cx="150" cy="150" r="140" fill="url(#jioGrad)" />
-  <circle cx="150" cy="150" r="132" fill="none" stroke="#ffffff" stroke-width="4" stroke-opacity="0.25"/>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100%" height="100%">
   
-  <!-- Jio Iconic Typography -->
-  <g fill="#ffffff">
-    <!-- 'J' -->
-    <path d="M 85 88 L 115 88 L 115 178 C 115 198 105 212 85 212 C 72 212 60 205 52 195 L 68 178 C 73 184 78 187 85 187 C 91 187 95 183 95 174 L 95 88 Z" />
-    <circle cx="100" cy="62" r="14" />
+  <ns0:defs>
+    <ns0:linearGradient id="jioGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <ns0:stop offset="0%" stop-color="#0066cc" />
+      <ns0:stop offset="100%" stop-color="#003399" />
+    </ns0:linearGradient>
+  </ns0:defs>
+  <ns0:circle cx="150" cy="150" r="140" fill="url(#jioGrad)" />
+  <ns0:circle cx="150" cy="150" r="132" fill="none" stroke="#ffffff" stroke-width="4" stroke-opacity="0.25" />
+  
+  
+  <ns0:g fill="#ffffff">
     
-    <!-- 'i' -->
-    <rect x="135" y="105" width="22" height="107" rx="6" />
-    <circle cx="146" cy="78" r="13" />
+    <ns0:path d="M 85 88 L 115 88 L 115 178 C 115 198 105 212 85 212 C 72 212 60 205 52 195 L 68 178 C 73 184 78 187 85 187 C 91 187 95 183 95 174 L 95 88 Z" />
+    <ns0:circle cx="100" cy="62" r="14" />
     
-    <!-- 'o' -->
-    <ellipse cx="215" cy="158" rx="42" ry="54" fill="none" stroke="#ffffff" stroke-width="22" />
-  </g>
-</svg>
+    
+    <ns0:rect x="135" y="105" width="22" height="107" rx="6" />
+    <ns0:circle cx="146" cy="78" r="13" />
+    
+    
+    <ns0:ellipse cx="215" cy="158" rx="42" ry="54" fill="none" stroke="#ffffff" stroke-width="22" />
+  </ns0:g>
+</ns0:svg>

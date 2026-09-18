@@ -1,24 +1,26 @@
 "use client";
 
 import React, { useState } from "react";
-import { MessageSquare } from "lucide-react";
 
 export default function FloatingWhatsApp() {
   const [hovered, setHovered] = useState(false);
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "918355976842";
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "917678561876";
   const defaultMessage = encodeURIComponent(
-    "Hello CSD Enterprises, I would like to inquire about your B2B industrial automation and IT infrastructure solutions."
+    "Hello CSD Enterprises, I would like to inquire about your turnkey system integration, hydrometrology, CCTV, and AMC services."
   );
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3">
       {/* Tooltip Label */}
       <div
-        className={`hidden sm:block px-3 py-1.5 rounded-lg bg-navy-950/90 text-white text-xs font-semibold shadow-lg border border-cyan-500/30 backdrop-blur-md transition-all duration-200 ${
+        className={`hidden sm:block px-3 py-1.5 rounded-lg bg-navy-950/95 text-white text-xs font-bold shadow-xl border border-emerald-500/40 backdrop-blur-md transition-all duration-200 ${
           hovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2 pointer-events-none"
         }`}
       >
-        Chat on WhatsApp
+        <span className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>24*7 WhatsApp: 7678561876</span>
+        </span>
       </div>
 
       {/* Floating Action Button */}
@@ -26,10 +28,10 @@ export default function FloatingWhatsApp() {
         href={`https://wa.me/${whatsappNumber}?text=${defaultMessage}`}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Direct B2B Inquiry on WhatsApp"
+        aria-label="Direct 24*7 Inquiry on WhatsApp"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="w-13 h-13 rounded-full bg-gradient-to-tr from-emerald-600 to-emerald-400 hover:from-emerald-500 hover:to-emerald-300 text-white shadow-xl shadow-emerald-500/25 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group relative"
+        className="w-14 h-14 rounded-full bg-gradient-to-tr from-emerald-600 to-emerald-400 hover:from-emerald-500 hover:to-emerald-300 text-white shadow-xl shadow-emerald-500/30 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group relative"
       >
         {/* Animated Radar Ping */}
         <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
@@ -39,7 +41,7 @@ export default function FloatingWhatsApp() {
 
         {/* WhatsApp Icon SVG */}
         <svg
-          className="w-6 h-6 fill-current"
+          className="w-7 h-7 fill-current"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >

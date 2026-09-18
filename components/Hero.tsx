@@ -21,24 +21,45 @@ interface HeroProps {
 
 const FALLBACK_SLIDES: HeroSlide[] = [
   {
-    badge: "Active across 9+ States | Mission-Critical 24/7",
-    heading: "Empowering Industries with",
-    highlightedText: "Advanced Automation & IT Infrastructure.",
+    badge: "Vision of Connectivity | System Integrator Established 2019",
+    heading: "Connecting India's Industries with",
+    highlightedText: "SCADA, Hydrometrology & Satcom Networks.",
     description:
-      "Delivering exceptional PLC/SCADA, CCTV Surveillance, and Satcom solutions for offshore and onshore enterprise clients since 2019. Trusted by India's premier energy, telecommunications, and defense organizations.",
-    primaryCtaText: "Explore Our Solutions",
+      "Delivering exceptional turnkey connectivity across various media, real-time SCADA and hydrometrology data transfer, flameproof CCTV surveillance, and Comprehensive AMC engineering nationwide since 2019.",
+    primaryCtaText: "Explore 18+ Core Services",
     primaryCtaUrl: "#services",
-    secondaryCtaText: "View Prestigious Projects",
-    secondaryCtaUrl: "#projects",
+    secondaryCtaText: "Our Pan-India Presence",
+    secondaryCtaUrl: "#presence",
     image: "/images/automation-hero.jpg",
-    systemUptime: "99.98% System Uptime",
+    systemUptime: "24/7 Technical SLA",
     telemetryItems: [
-      { label: "Flameproof SCADA & PLC", value: "Active" },
-      { label: "Explosion-Proof CCTV", value: "Verified" },
-      { label: "Solar AWS Hydrometrology", value: "Transmitting" },
-      { label: "Offshore TSAT Links", value: "Online" },
+      { label: "V-SAT Satellite Link", value: "Online (Zero Latency)" },
+      { label: "SCADA Data Transfer", value: "Real-Time Active" },
+      { label: "Solar AWS Hydrology", value: "INSAT Transmitting" },
+      { label: "Hazardous-Zone CCTV", value: "PESO Certified" },
     ],
     sortOrder: 0,
+    isActive: true,
+  },
+  {
+    badge: "Offshore Mumbai High & Pan-India Presence",
+    heading: "Mission-Critical Telemetry &",
+    highlightedText: "Deepwater Offshore Communications.",
+    description:
+      "Pioneering high-availability satellite telemetry, remote SCADA connectivity, and ruggedized explosion-proof surveillance in deepwater basins and hazardous hydrocarbon storage facilities.",
+    primaryCtaText: "Review Turnkey Scope",
+    primaryCtaUrl: "#services",
+    secondaryCtaText: "Request Technical RFP",
+    secondaryCtaUrl: "#contact",
+    image: "/images/industrial-facility.jpg",
+    systemUptime: "Zero Failover Latency",
+    telemetryItems: [
+      { label: "Deepwater TSAT Transceiver", value: "Locked" },
+      { label: "Marine SCADA Uplink", value: "Active" },
+      { label: "Remote AWS Telemetry", value: "Synchronized" },
+      { label: "Comprehensive AMC", value: "24/7 Response" },
+    ],
+    sortOrder: 1,
     isActive: true,
   },
 ];
@@ -76,7 +97,7 @@ export default function Hero({ slides }: HeroProps) {
       className="relative min-h-[92vh] pt-32 pb-20 flex items-center tech-grid overflow-hidden border-b border-slate-200/80 dark:border-cyan-500/10"
     >
       {/* Background radial glow accents */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-cyan-500/10 dark:bg-cyan-500/15 blur-[120px] rounded-full pointer-events-none animate-float" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-red-600/10 dark:bg-red-600/15 blur-[120px] rounded-full pointer-events-none animate-float" />
       <div className="absolute bottom-10 right-10 w-[400px] h-[300px] bg-blue-600/10 dark:bg-blue-600/15 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -85,10 +106,10 @@ export default function Hero({ slides }: HeroProps) {
           <div className="lg:col-span-7 flex flex-col items-start space-y-6">
             {/* Status Metric Badge */}
             <ScrollReveal delay={1}>
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-navy-900/90 border border-slate-300/80 dark:border-cyan-500/30 text-xs font-semibold text-slate-800 dark:text-cyan-400 shadow-sm backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-navy-900/90 border border-slate-300/80 dark:border-red-500/30 text-xs font-semibold text-slate-800 dark:text-red-400 shadow-sm backdrop-blur-sm">
                 <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                 </span>
                 <span>{currentSlide.badge}</span>
               </div>
@@ -99,7 +120,7 @@ export default function Hero({ slides }: HeroProps) {
               <div key={slideKey} className="hero-slide-enter">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-navy-950 dark:text-white leading-[1.15]">
                   {currentSlide.heading}{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-rose-500 to-amber-500">
                     {currentSlide.highlightedText}
                   </span>
                 </h1>
@@ -115,7 +136,7 @@ export default function Hero({ slides }: HeroProps) {
 
             {/* CTAs */}
             <ScrollReveal delay={4}>
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Link
                   href={currentSlide.primaryCtaUrl || "#services"}
                   className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-base font-bold text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 rounded-xl shadow-lg shadow-red-600/25 hover:shadow-red-600/35 transition-all duration-200 btn-press"
@@ -125,7 +146,7 @@ export default function Hero({ slides }: HeroProps) {
                 </Link>
                 {currentSlide.secondaryCtaText && (
                   <Link
-                    href={currentSlide.secondaryCtaUrl || "#projects"}
+                    href={currentSlide.secondaryCtaUrl || "#presence"}
                     className="inline-flex items-center gap-2 px-6 py-3.5 text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-navy-900/80 dark:hover:bg-navy-800 border border-slate-300/80 dark:border-slate-700 rounded-xl transition-all duration-200 btn-press"
                   >
                     <span>{currentSlide.secondaryCtaText}</span>

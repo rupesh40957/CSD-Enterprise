@@ -135,7 +135,7 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
 
   const logoSrc = settings?.logo && settings.logo !== "/logo/csd-logo.png" ? settings.logo : "/logo/csd-logo.svg";
   const companyName = settings?.companyName || "CSD Enterprises";
-  const tagline = settings?.tagline || "UNIT OF CSD AUTOMATION & TECHNOLOGIES";
+  const tagline = settings?.tagline || "Vision of Connectivity";
   const logoClassName =
     theme === "dark"
       ? "object-contain w-full h-full transition-all duration-300 brightness-0 invert"
@@ -204,14 +204,14 @@ export default function Navbar({ settings, navItems }: NavbarProps) {
           </nav>
 
           {/* Right Action Elements */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2.5">
             <ThemeToggle />
 
             {/* Request Quote Primary CTA */}
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold rounded-xl shadow-sm text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 shadow-red-600/25 hover:shadow-md active:scale-[0.98] transition-all duration-200"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-bold rounded-xl shadow-sm text-white bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 shadow-red-600/25 hover:shadow-md active:scale-[0.98] transition-all duration-200"
             >
               <PhoneCall className="w-3.5 h-3.5" />
               <span>Request Quote</span>
