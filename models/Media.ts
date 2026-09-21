@@ -10,5 +10,6 @@ export interface Media {
   sizeBytes?: number;
   width?: number;
   height?: number;
+  access?: "public" | "private";
   createdAt: Date;
 }

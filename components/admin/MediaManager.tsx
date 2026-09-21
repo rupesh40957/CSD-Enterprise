@@ -220,7 +220,7 @@ export default function MediaManager() {
               fetchMedia();
             }
           }}
-          helperText="Upload any JPG, PNG, WebP, SVG or GIF image from your computer. It will be stored in public/images/uploads and indexed here immediately."
+          helperText="Upload any JPG, PNG, WebP, SVG or GIF image from your device. In production, files are securely stored on Vercel Blob and indexed here immediately."
         />
       </div>
 

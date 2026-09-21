@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb";
 import { getDatabase } from "@/lib/mongodb";
 import { verifyAdminRequest } from "@/lib/auth";
 import { Media } from "@/models";
+import { put, del } from "@vercel/blob";
 import fs from "fs";
 import path from "path";
 
@@ -32,6 +33,7 @@ export async function POST(request: NextRequest) {
       let finalUrl = body.url;
       const filename = body.filename || `asset_${Date.now()}`;
       const alt = body.alt || "CSD Enterprises Media Asset";
+      const requestedAccess = body.access === "private" ? "private" : "public";
 
       // If base64 data was provided
       if (body.base64 && body.base64.includes(";base64,")) {
@@ -39,16 +41,23 @@ export async function POST(request: NextRequest) {
         const mime = parts[0].split(":")[1] || "image/png";
         const ext = mime.split("/")[1] || "png";
         const buffer = Buffer.from(parts[1], "base64");
-
-        const uploadsDir = path.join(process.cwd(), "public", "images", "uploads");
-        if (!fs.existsSync(uploadsDir)) {
-          fs.mkdirSync(uploadsDir, { recursive: true });
-        }
-
         const safeFilename = `${Date.now()}_${filename.replace(/[^\w.-]/g, "")}.${ext}`;
-        const filePath = path.join(uploadsDir, safeFilename);
-        fs.writeFileSync(filePath, buffer);
-        finalUrl = `/images/uploads/${safeFilename}`;
+
+        if (process.env.BLOB_READ_WRITE_TOKEN) {
+          const blob = await put(`uploads/${safeFilename}`, buffer, {
+            access: requestedAccess,
+            contentType: mime,
+          });
+          finalUrl = blob.url;
+        } else {
+          const uploadsDir = path.join(process.cwd(), "public", "images", "uploads");
+          if (!fs.existsSync(uploadsDir)) {
+            fs.mkdirSync(uploadsDir, { recursive: true });
+          }
+          const filePath = path.join(uploadsDir, safeFilename);
+          fs.writeFileSync(filePath, buffer);
+          finalUrl = `/images/uploads/${safeFilename}`;
+        }
       }
 
       if (!finalUrl) {
@@ -61,6 +70,7 @@ export async function POST(request: NextRequest) {
         filename,
         alt,
         type: body.type || "image",
+        access: requestedAccess,
         createdAt: new Date(),
       };
 
@@ -76,19 +86,31 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "No file provided" }, { status: 400 });
       }
 
-      const buffer = Buffer.from(await file.arrayBuffer());
-      const uploadsDir = path.join(process.cwd(), "public", "images", "uploads");
-      if (!fs.existsSync(uploadsDir)) {
-        fs.mkdirSync(uploadsDir, { recursive: true });
-      }
+      const requestedAccess = (formData.get("access") as string) || "public";
+      const access: "public" | "private" = requestedAccess === "private" ? "private" : "public";
 
       const ext = path.extname(file.name) || ".png";
       const baseName = path.basename(file.name, ext).replace(/[^\w.-]/g, "_").slice(0, 50);
       const safeFilename = `${Date.now()}_${baseName}${ext}`;
-      const filePath = path.join(uploadsDir, safeFilename);
-      fs.writeFileSync(filePath, buffer);
+      let finalUrl = "";
 
-      const finalUrl = `/images/uploads/${safeFilename}`;
+      if (process.env.BLOB_READ_WRITE_TOKEN) {
+        const blob = await put(`uploads/${safeFilename}`, file, {
+          access,
+          contentType: file.type,
+        });
+        finalUrl = blob.url;
+      } else {
+        const buffer = Buffer.from(await file.arrayBuffer());
+        const uploadsDir = path.join(process.cwd(), "public", "images", "uploads");
+        if (!fs.existsSync(uploadsDir)) {
+          fs.mkdirSync(uploadsDir, { recursive: true });
+        }
+        const filePath = path.join(uploadsDir, safeFilename);
+        fs.writeFileSync(filePath, buffer);
+        finalUrl = `/images/uploads/${safeFilename}`;
+      }
+
       const db = await getDatabase();
       const newMedia: Media = {
         url: finalUrl,
@@ -96,6 +118,7 @@ export async function POST(request: NextRequest) {
         alt: (formData.get("alt") as string) || file.name,
         type: file.type || "image",
         sizeBytes: file.size,
+        access,
         createdAt: new Date(),
       };
 
@@ -106,7 +129,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unsupported content type" }, { status: 400 });
   } catch (error) {
     console.error("Media upload error:", error instanceof Error ? error.message : "Unknown error");
-    return NextResponse.json({ error: "Failed to upload media" }, { status: 500 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : "Failed to upload media" }, { status: 500 });
   }
 }
 
@@ -120,6 +143,16 @@ export async function DELETE(request: NextRequest) {
     if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 });
 
     const db = await getDatabase();
+    const mediaItem = await db.collection<Media>("media").findOne({ _id: new ObjectId(id) });
+
+    if (mediaItem?.url && mediaItem.url.includes("blob.vercel-storage.com") && process.env.BLOB_READ_WRITE_TOKEN) {
+      try {
+        await del(mediaItem.url);
+      } catch (delErr) {
+        console.warn("Failed to delete blob from Vercel storage:", delErr);
+      }
+    }
+
     await db.collection("media").deleteOne({ _id: new ObjectId(id) });
     return NextResponse.json({ success: true, message: "Media deleted successfully" });
   } catch (error) {

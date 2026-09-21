@@ -22,6 +22,7 @@ export interface ImageUploaderProps {
   aspectRatio?: "square" | "video" | "banner" | "auto";
   previewHeight?: string;
   className?: string;
+  access?: "public" | "private";
 }
 
 export default function ImageUploader({
@@ -33,6 +34,7 @@ export default function ImageUploader({
   aspectRatio = "auto",
   previewHeight = "h-36",
   className = "",
+  access = "public",
 }: ImageUploaderProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -63,6 +65,7 @@ export default function ImageUploader({
       const formData = new FormData();
       formData.append("file", file);
       formData.append("alt", file.name);
+      formData.append("access", access);
 
       const res = await fetch("/api/upload", {
         method: "POST",
