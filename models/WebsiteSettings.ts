@@ -8,6 +8,7 @@ export interface WebsiteSettings {
   favicon: string;
   phone: string;
   altPhone?: string;
+  helpline?: string;
   email: string;
   address: string;
   workingHours: string;

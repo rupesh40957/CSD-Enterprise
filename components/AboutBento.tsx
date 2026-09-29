@@ -19,11 +19,12 @@ import {
   Workflow,
   Compass,
 } from "lucide-react";
-import { AboutContent } from "@/models";
+import { AboutContent, WebsiteSettings } from "@/models";
 import ScrollReveal from "./ScrollReveal";
 
 interface AboutBentoProps {
   about?: AboutContent | null;
+  settings?: WebsiteSettings | null;
 }
 
 // 9 Official Core Values directly from Company Profile Page 4
@@ -98,8 +99,9 @@ const ICON_MAP: Record<string, React.ElementType> = {
   CheckCircle2,
 };
 
-export default function AboutBento({ about }: AboutBentoProps) {
+export default function AboutBento({ about, settings }: AboutBentoProps) {
   const [activeTab, setActiveTab] = useState<"overview" | "values" | "team">("overview");
+  const helpline = settings?.helpline || settings?.phone || "+91 7678561876";
 
   return (
     <section
@@ -426,8 +428,8 @@ export default function AboutBento({ about }: AboutBentoProps) {
                 </p>
                 <div className="flex items-center gap-3 text-xs font-bold text-navy-950 dark:text-white">
                   <span>Direct Hotline:</span>
-                  <a href="tel:7678561876" className="text-red-600 dark:text-red-400 hover:underline">
-                    +91 7678561876
+                  <a href={`tel:${helpline.replace(/\s+/g, '')}`} className="text-red-600 dark:text-red-400 hover:underline">
+                    {helpline}
                   </a>
                 </div>
               </div>

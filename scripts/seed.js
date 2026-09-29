@@ -16,6 +16,7 @@ const WEBSITE_SETTINGS = {
   favicon: "/logo/csd-favicon.png",
   phone: "+91 7678561876",
   altPhone: "+91 8355976842 / 9022248869",
+  helpline: "+91 7678561876",
   email: "support@csdenterprises.in",
   address: "OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai, Maharashtra - 401203",
   workingHours: "Mon – Sat: 9:00 AM – 7:00 PM (24/7 On-Call Support)",

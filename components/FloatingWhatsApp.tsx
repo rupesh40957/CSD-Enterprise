@@ -1,10 +1,63 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { WebsiteSettings } from "@/models";
 
-export default function FloatingWhatsApp() {
+interface FloatingWhatsAppProps {
+  settings?: WebsiteSettings | null;
+  whatsappNumber?: string;
+}
+
+export default function FloatingWhatsApp({
+  settings: initialSettings,
+  whatsappNumber: directNumber,
+}: FloatingWhatsAppProps) {
   const [hovered, setHovered] = useState(false);
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "917678561876";
+  const [clientSettings, setClientSettings] = useState<WebsiteSettings | null>(
+    initialSettings || null
+  );
+
+  // If initialSettings wasn't provided, fetch it client-side as fallback
+  useEffect(() => {
+    if (!initialSettings && !directNumber) {
+      let isMounted = true;
+      fetch("/api/settings")
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (isMounted && data?.settings) {
+            setClientSettings(data.settings);
+          }
+        })
+        .catch(() => {});
+      return () => {
+        isMounted = false;
+      };
+    }
+  }, [initialSettings, directNumber]);
+
+  const activeSettings = initialSettings || clientSettings;
+
+  // Determine effective raw WhatsApp number
+  const rawNumber =
+    directNumber ||
+    activeSettings?.whatsapp ||
+    activeSettings?.phone ||
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
+    "918355976842";
+
+  // Clean to digits
+  const digits = rawNumber.replace(/\D/g, "");
+  // Formatted for wa.me (if standard 10 digits in India, prefix 91)
+  const waNumber = digits.length === 10 ? `91${digits}` : digits;
+
+  // Formatted for display
+  const displayNumber =
+    digits.length === 10
+      ? `+91 ${digits}`
+      : digits.length === 12 && digits.startsWith("91")
+      ? `+91 ${digits.slice(2)}`
+      : rawNumber;
+
   const defaultMessage = encodeURIComponent(
     "Hello CSD Enterprises, I would like to inquire about your turnkey system integration, hydrometrology, CCTV, and AMC services."
   );
@@ -19,13 +72,13 @@ export default function FloatingWhatsApp() {
       >
         <span className="flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>24*7 WhatsApp: 7678561876</span>
+          <span>24*7 WhatsApp: {displayNumber}</span>
         </span>
       </div>
 
       {/* Floating Action Button */}
       <a
-        href={`https://wa.me/${whatsappNumber}?text=${defaultMessage}`}
+        href={`https://wa.me/${waNumber}?text=${defaultMessage}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Direct 24*7 Inquiry on WhatsApp"

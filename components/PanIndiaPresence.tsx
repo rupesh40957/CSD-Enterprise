@@ -2,6 +2,11 @@
 
 import React, { useState } from "react";
 import { MapPin, Building, ShieldCheck, Phone, CheckCircle2, ArrowRight, Table, LayoutGrid } from "lucide-react";
+import { WebsiteSettings } from "@/models";
+
+interface PanIndiaPresenceProps {
+  settings?: WebsiteSettings | null;
+}
 
 interface RegionalOffice {
   srNo: number;
@@ -75,8 +80,9 @@ const REGIONAL_OFFICES: RegionalOffice[] = [
   },
 ];
 
-export default function PanIndiaPresence() {
+export default function PanIndiaPresence({ settings }: PanIndiaPresenceProps = {}) {
   const [viewFormat, setViewFormat] = useState<"grid" | "table">("grid");
+  const onCallPhone = settings?.helpline || settings?.whatsapp || settings?.phone || "7678561876";
 
   return (
     <section id="presence" className="py-24 bg-slate-50 dark:bg-navy-950 border-b border-slate-200 dark:border-navy-800/80 overflow-hidden relative">
@@ -149,7 +155,7 @@ export default function PanIndiaPresence() {
             <div className="text-xs sm:text-sm font-bold text-navy-950 dark:text-white mt-1">
               Technical On-Call Support
             </div>
-            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Call &amp; Msg: 7678561876</div>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Call &amp; Msg: {onCallPhone}</div>
           </div>
           <div className="p-5 rounded-2xl glass-panel text-center shadow-sm border border-slate-200 dark:border-navy-800 bg-white/80 dark:bg-navy-900/60">
             <div className="text-3xl sm:text-4xl font-black text-red-600 dark:text-red-400">100%</div>

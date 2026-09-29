@@ -90,6 +90,7 @@ export const websiteSettingsSchema = z.object({
   favicon: z.string().trim().default("/logo/csd-favicon.png"),
   phone: z.string().trim().min(5, "Primary phone number is required"),
   altPhone: z.string().trim().optional(),
+  helpline: z.string().trim().optional(),
   email: z.string().trim().email("Valid company email is required"),
   address: z.string().trim().min(5, "Address is required"),
   workingHours: z.string().trim().min(3, "Working hours are required"),

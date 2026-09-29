@@ -31,10 +31,11 @@ import {
   Wrench,
   FileCheck2,
 } from "lucide-react";
-import { Service } from "@/models";
+import { Service, WebsiteSettings } from "@/models";
 
 interface ServicesSectionProps {
   services?: Service[];
+  settings?: WebsiteSettings | null;
 }
 
 export interface GranularService {
@@ -291,7 +292,8 @@ const VERTICALS = [
   { id: "amc", label: "Turnkey AMC Services" },
 ];
 
-export default function ServicesSection({ services = [] }: ServicesSectionProps) {
+export default function ServicesSection({ services = [], settings }: ServicesSectionProps) {
+  const callDeskPhone = settings?.helpline || settings?.phone || "+91 7678561876";
   const [viewMode, setViewMode] = useState<"spotlight" | "grid">("spotlight");
   const [activeVertical, setActiveVertical] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -575,10 +577,10 @@ export default function ServicesSection({ services = [] }: ServicesSectionProps)
                       <ArrowRight className="w-3.5 h-3.5" />
                     </a>
                     <a
-                      href="tel:7678561876"
+                      href={`tel:${callDeskPhone.replace(/\s+/g, "")}`}
                       className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-navy-800 dark:hover:bg-navy-700 border border-slate-200 dark:border-navy-700 transition-all"
                     >
-                      Call Desk: +91 7678561876
+                      Call Desk: {callDeskPhone}
                     </a>
                   </div>
                 </div>

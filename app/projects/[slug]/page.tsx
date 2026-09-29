@@ -66,7 +66,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const whatsappPhone = (settings?.phone || "+91 8355976842").replace(/\D/g, "");
+  const rawWa = settings?.whatsapp || settings?.phone || "918355976842";
+  const waDigits = rawWa.replace(/\D/g, "");
+  const whatsappPhone = waDigits.length === 10 ? `91${waDigits}` : waDigits;
   const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(
     `Hello CSD Enterprises, I would like to discuss a project deployment similar to: ${project.title} (Client: ${project.client}).`
   )}`;
@@ -372,7 +374,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </div>
       </article>
 
-      <FloatingWhatsApp />
+      <FloatingWhatsApp settings={settings} />
       <Footer settings={settings} />
     </main>
   );

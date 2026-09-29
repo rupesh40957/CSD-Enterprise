@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { Save, CheckCircle2, AlertCircle, RefreshCw } from "lucide-react";
 import { WebsiteSettings } from "@/models";
 import ImageUploader from "./ImageUploader";
@@ -14,6 +13,7 @@ export default function WebsiteSettingsManager() {
     favicon: "/logo/csd-favicon.png",
     phone: "+91 8355976842",
     altPhone: "9022248869",
+    helpline: "+91 8355976842",
     email: "support@csdenterprises.in",
     address: "OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai, Maharashtra - 401203",
     workingHours: "Mon – Sat: 9:00 AM – 7:00 PM (24/7 On-Call Support)",
@@ -105,11 +105,10 @@ export default function WebsiteSettingsManager() {
 
       {feedback && (
         <div
-          className={`p-3.5 rounded-xl text-xs flex items-center gap-2.5 animate-in fade-in ${
-            feedback.type === "success"
-              ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400"
-              : "bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-400"
-          }`}
+          className={`p-3.5 rounded-xl text-xs flex items-center gap-2.5 animate-in fade-in ${feedback.type === "success"
+            ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400"
+            : "bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-400"
+            }`}
         >
           {feedback.type === "success" ? (
             <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-500" />
@@ -145,34 +144,34 @@ export default function WebsiteSettingsManager() {
             />
           </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                    Company Legal Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="companyName"
-                    required
-                    value={settings.companyName}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2 rounded-xl text-sm bg-slate-50 dark:bg-navy-950 border border-slate-200 dark:border-navy-800 focus:border-cyan-500 focus:outline-none dark:text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                    Brand Tagline / Division *
-                  </label>
-                  <input
-                    type="text"
-                    name="tagline"
-                    required
-                    value={settings.tagline}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2 rounded-xl text-sm bg-slate-50 dark:bg-navy-950 border border-slate-200 dark:border-navy-800 focus:border-cyan-500 focus:outline-none dark:text-white"
-                  />
-                </div>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                Company Legal Name *
+              </label>
+              <input
+                type="text"
+                name="companyName"
+                required
+                value={settings.companyName}
+                onChange={handleChange}
+                className="w-full px-3.5 py-2 rounded-xl text-sm bg-slate-50 dark:bg-navy-950 border border-slate-200 dark:border-navy-800 focus:border-cyan-500 focus:outline-none dark:text-white"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                Brand Tagline / Division *
+              </label>
+              <input
+                type="text"
+                name="tagline"
+                required
+                value={settings.tagline}
+                onChange={handleChange}
+                className="w-full px-3.5 py-2 rounded-xl text-sm bg-slate-50 dark:bg-navy-950 border border-slate-200 dark:border-navy-800 focus:border-cyan-500 focus:outline-none dark:text-white"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Contact Information */}
@@ -181,7 +180,7 @@ export default function WebsiteSettingsManager() {
             Corporate Office &amp; Operations Helplines
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Primary Phone *
@@ -206,6 +205,22 @@ export default function WebsiteSettingsManager() {
                 onChange={handleChange}
                 className="w-full px-3.5 py-2 rounded-xl text-sm bg-slate-50 dark:bg-navy-950 border border-slate-200 dark:border-navy-800 focus:border-cyan-500 focus:outline-none dark:text-white"
               />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                24*7 Operations Helpline
+              </label>
+              <input
+                type="text"
+                name="helpline"
+                placeholder="+91 8355976842"
+                value={settings.helpline || ""}
+                onChange={handleChange}
+                className="w-full px-3.5 py-2 rounded-xl text-sm bg-slate-50 dark:bg-navy-950 border border-slate-200 dark:border-navy-800 focus:border-cyan-500 focus:outline-none dark:text-white"
+              />
+              <span className="text-[10px] text-slate-400 mt-0.5 block">
+                Primary on-call &amp; contact banner hotline
+              </span>
             </div>
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
@@ -261,15 +276,19 @@ export default function WebsiteSettingsManager() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                WhatsApp Number (E.164 without +)
+                WhatsApp Number
               </label>
               <input
                 type="text"
                 name="whatsapp"
+                placeholder="e.g. 918355976842 or 8355976842"
                 value={settings.whatsapp || ""}
                 onChange={handleChange}
                 className="w-full px-3.5 py-2 rounded-xl text-sm bg-slate-50 dark:bg-navy-950 border border-slate-200 dark:border-navy-800 focus:border-cyan-500 focus:outline-none dark:text-white"
               />
+              <span className="text-[10px] text-slate-400 mt-0.5 block">
+                Powers 24*7 Floating WhatsApp button &amp; direct chat
+              </span>
             </div>
             <div>
               <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">

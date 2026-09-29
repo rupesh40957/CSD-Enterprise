@@ -90,10 +90,10 @@ export default function DynamicSectionRenderer({ data }: DynamicSectionRendererP
             return <StatsSection key="stats" statistics={data.statistics} />;
 
           case "about":
-            return <AboutBento key="about" about={data.aboutContent} />;
+            return <AboutBento key="about" about={data.aboutContent} settings={data.settings} />;
 
           case "services":
-            return <ServicesSection key="services" services={data.services} />;
+            return <ServicesSection key="services" services={data.services} settings={data.settings} />;
 
           case "industries":
             return <IndustriesSection key="industries" industries={data.industries} />;
@@ -111,7 +111,7 @@ export default function DynamicSectionRenderer({ data }: DynamicSectionRendererP
             return <TestimonialsSection key="testimonials" testimonials={data.testimonials} />;
 
           case "presence":
-            return <PanIndiaPresence key="presence" />;
+            return <PanIndiaPresence key="presence" settings={data.settings} />;
 
           case "blog":
             return <BlogSection key="blog" blogPosts={data.blogPosts} />;
@@ -123,7 +123,7 @@ export default function DynamicSectionRenderer({ data }: DynamicSectionRendererP
             return <CtaSection key="cta" cta={data.ctaContent} />;
 
           case "contact":
-            return <ContactSection key="contact" />;
+            return <ContactSection key="contact" settings={data.settings} />;
 
           default:
             return null;

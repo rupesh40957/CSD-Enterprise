@@ -196,7 +196,7 @@ export default async function BlogPostDetailPage({ params }: BlogPageProps) {
         </div>
       </article>
 
-      <FloatingWhatsApp />
+      <FloatingWhatsApp settings={settings} />
       <Footer settings={settings} />
     </main>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Mail,
   Phone,
@@ -10,7 +10,13 @@ import {
   AlertCircle,
   Clock,
   ShieldCheck,
+  MessageSquare,
 } from "lucide-react";
+import { WebsiteSettings } from "@/models";
+
+interface ContactSectionProps {
+  settings?: WebsiteSettings | null;
+}
 
 const SOLUTIONS = [
   "V-SAT Satellite Communication Services",
@@ -31,7 +37,58 @@ const SOLUTIONS = [
   "Other Custom Turnkey Integration",
 ];
 
-export default function ContactSection() {
+export default function ContactSection({ settings: initialSettings }: ContactSectionProps = {}) {
+  const [clientSettings, setClientSettings] = useState<WebsiteSettings | null>(
+    initialSettings || null
+  );
+
+  useEffect(() => {
+    if (!initialSettings) {
+      let isMounted = true;
+      fetch("/api/settings")
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (isMounted && data?.settings) {
+            setClientSettings(data.settings);
+          }
+        })
+        .catch(() => {});
+      return () => {
+        isMounted = false;
+      };
+    }
+  }, [initialSettings]);
+
+  const settings = initialSettings || clientSettings;
+
+  const helpline = settings?.helpline || settings?.phone || "+91 7678561876";
+  const helplineClean = helpline.replace(/\s+/g, "");
+
+  const rawWhatsapp =
+    settings?.whatsapp ||
+    settings?.helpline ||
+    settings?.phone ||
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
+    "918355976842";
+  const waDigits = rawWhatsapp.replace(/\D/g, "");
+  const waPhone = waDigits.length === 10 ? `91${waDigits}` : waDigits;
+  const whatsappDisplay =
+    waDigits.length === 10
+      ? `+91 ${waDigits}`
+      : waDigits.length === 12 && waDigits.startsWith("91")
+      ? `+91 ${waDigits.slice(2)}`
+      : rawWhatsapp;
+  const whatsappUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(
+    "Hello CSD Enterprises, I would like to inquire about your turnkey solutions and services."
+  )}`;
+
+  const primaryPhone = settings?.phone || "+91 8355976842";
+  const altPhone = settings?.altPhone;
+  const emailAddr = settings?.email || "support@csdenterprises.in";
+  const addressText =
+    settings?.address ||
+    "OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai, Maharashtra - 401203";
+
   const [formData, setFormData] = useState({
     fullName: "",
     workEmail: "",
@@ -114,20 +171,34 @@ export default function ContactSection() {
                 <div className="w-10 h-10 rounded-lg bg-red-500/15 border border-red-500/30 flex items-center justify-center text-red-600 dark:text-red-400 shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <h4 className="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
                       24*7 Dedicated Operations Helpline
                     </h4>
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   </div>
-                  <div className="text-base font-extrabold text-navy-950 dark:text-white mt-1">
-                    <a href="tel:7678561876" className="hover:text-red-600 dark:hover:text-red-400 transition-colors">
-                      +91 7678561876
+                  <div className="flex flex-wrap items-center gap-2.5 mt-1.5">
+                    <a
+                      href={`tel:${helplineClean}`}
+                      className="text-base font-extrabold text-navy-950 dark:text-white hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                    >
+                      {helpline}
                     </a>
+                    {waPhone && (
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm shadow-emerald-600/30 transition-all btn-press"
+                      >
+                        <MessageSquare className="w-3.5 h-3.5" />
+                        <span>Chat on WhatsApp</span>
+                      </a>
+                    )}
                   </div>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                    Call or message us anytime on WhatsApp
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                    Call helpline or message anytime on WhatsApp ({whatsappDisplay})
                   </p>
                 </div>
               </div>
@@ -140,14 +211,24 @@ export default function ContactSection() {
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     Corporate Office Lines
                   </h4>
-                  <div className="text-sm font-semibold text-navy-950 dark:text-white mt-0.5 space-x-3">
-                    <a href="tel:+918355976842" className="hover:text-red-600 dark:hover:text-red-400 transition-colors">
-                      +91 8355976842
+                  <div className="text-sm font-semibold text-navy-950 dark:text-white mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <a
+                      href={`tel:${primaryPhone.replace(/\s+/g, "")}`}
+                      className="hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                    >
+                      {primaryPhone}
                     </a>
-                    <span>•</span>
-                    <a href="tel:9022248869" className="hover:text-red-600 dark:hover:text-red-400 transition-colors">
-                      9022248869
-                    </a>
+                    {altPhone && (
+                      <>
+                        <span>•</span>
+                        <a
+                          href={`tel:${altPhone.replace(/\s+/g, "")}`}
+                          className="hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                        >
+                          {altPhone}
+                        </a>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -161,10 +242,10 @@ export default function ContactSection() {
                     Official Corporate Email
                   </h4>
                   <a
-                    href="mailto:support@csdenterprises.in"
+                    href={`mailto:${emailAddr}`}
                     className="text-sm font-semibold text-navy-950 dark:text-white mt-0.5 hover:text-red-600 dark:hover:text-red-400 transition-colors block"
                   >
-                    support@csdenterprises.in
+                    {emailAddr}
                   </a>
                 </div>
               </div>
@@ -178,7 +259,7 @@ export default function ContactSection() {
                     Corporate Headquarters
                   </h4>
                   <p className="text-xs sm:text-sm font-semibold text-navy-950 dark:text-white mt-0.5">
-                    OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai, Maharashtra - 401203
+                    {addressText}
                   </p>
                 </div>
               </div>

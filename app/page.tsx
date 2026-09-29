@@ -113,7 +113,7 @@ export default async function HomePage() {
         <div className="pt-2">
           <DynamicSectionRenderer data={homeData} />
         </div>
-        <FloatingWhatsApp />
+        <FloatingWhatsApp settings={settings} />
         <Footer settings={settings} services={homeData.services} navItems={navigation} />
       </div>
     </main>
