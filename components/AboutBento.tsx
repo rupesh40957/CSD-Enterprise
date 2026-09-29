@@ -101,7 +101,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
 
 export default function AboutBento({ about, settings }: AboutBentoProps) {
   const [activeTab, setActiveTab] = useState<"overview" | "values" | "team">("overview");
-  const helpline = settings?.helpline || settings?.phone || "+91 7678561876";
+  const helpline = settings?.helpline || settings?.phone || "+91 8355976842";
 
   return (
     <section

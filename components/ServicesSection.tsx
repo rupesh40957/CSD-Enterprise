@@ -293,7 +293,7 @@ const VERTICALS = [
 ];
 
 export default function ServicesSection({ services = [], settings }: ServicesSectionProps) {
-  const callDeskPhone = settings?.helpline || settings?.phone || "+91 7678561876";
+  const callDeskPhone = settings?.helpline || settings?.phone || "+91 8355976842";
   const [viewMode, setViewMode] = useState<"spotlight" | "grid">("spotlight");
   const [activeVertical, setActiveVertical] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");

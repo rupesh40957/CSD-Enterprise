@@ -34,7 +34,7 @@ export default function Footer({ settings, services = [], navItems = [] }: Foote
     theme === "dark"
       ? "object-contain w-full h-full transition-all duration-300 brightness-0 invert"
       : "object-contain w-full h-full transition-all duration-300";
-  const phone = settings?.phone || "+91 7678561876";
+  const phone = settings?.phone || "+91 8355976842";
   const emailAddr = settings?.email || "support@csdenterprises.in";
   const address = settings?.address || "OM Plaza Commercial Complex, 60, 1st Floor, Nalasopara West, Mumbai - 401203";
   const copyright = settings?.copyrightText || `Copyright © 2019–${new Date().getFullYear()} CSD Enterprises. All Rights Reserved.`;

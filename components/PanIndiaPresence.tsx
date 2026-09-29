@@ -82,7 +82,7 @@ const REGIONAL_OFFICES: RegionalOffice[] = [
 
 export default function PanIndiaPresence({ settings }: PanIndiaPresenceProps = {}) {
   const [viewFormat, setViewFormat] = useState<"grid" | "table">("grid");
-  const onCallPhone = settings?.helpline || settings?.whatsapp || settings?.phone || "7678561876";
+  const onCallPhone = settings?.helpline || settings?.whatsapp || settings?.phone || "8355976842";
 
   return (
     <section id="presence" className="py-24 bg-slate-50 dark:bg-navy-950 border-b border-slate-200 dark:border-navy-800/80 overflow-hidden relative">

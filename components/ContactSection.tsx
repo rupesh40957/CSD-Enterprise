@@ -52,7 +52,7 @@ export default function ContactSection({ settings: initialSettings }: ContactSec
             setClientSettings(data.settings);
           }
         })
-        .catch(() => {});
+        .catch(() => { });
       return () => {
         isMounted = false;
       };
@@ -61,7 +61,7 @@ export default function ContactSection({ settings: initialSettings }: ContactSec
 
   const settings = initialSettings || clientSettings;
 
-  const helpline = settings?.helpline || settings?.phone || "+91 7678561876";
+  const helpline = settings?.helpline || settings?.phone || "+91 8355976842";
   const helplineClean = helpline.replace(/\s+/g, "");
 
   const rawWhatsapp =
@@ -76,8 +76,8 @@ export default function ContactSection({ settings: initialSettings }: ContactSec
     waDigits.length === 10
       ? `+91 ${waDigits}`
       : waDigits.length === 12 && waDigits.startsWith("91")
-      ? `+91 ${waDigits.slice(2)}`
-      : rawWhatsapp;
+        ? `+91 ${waDigits.slice(2)}`
+        : rawWhatsapp;
   const whatsappUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(
     "Hello CSD Enterprises, I would like to inquire about your turnkey solutions and services."
   )}`;
